@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Video AI</title>
+<meta charset="UTF-8">
+<title>Video AI Tools</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#f3f6fc}
-header{background:#2563eb;color:white;padding:20px}
-.container{max-width:900px;margin:auto;padding:20px}
-.card{
-  background:white;padding:15px;margin-top:15px;
-  border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1)
-}
-a{text-decoration:none;color:#2563eb;font-weight:bold}
+body{background:linear-gradient(180deg,#0f172a,#020617);color:white;font-family:Segoe UI;}
+h1{text-align:center;padding:40px;}
+.cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;padding:20px;}
+.card{background:#1e293b;padding:25px;border-radius:22px;box-shadow:0 20px 40px rgba(0,0,0,.4);}
+.card p{color:#cbd5f5;margin:10px 0 20px;}
+.card a{background:#2563eb;padding:10px 22px;border-radius:999px;color:white;text-decoration:none;}
+.back{text-align:center;display:block;color:#93c5fd;margin:20px;}
 </style>
 </head>
 
 <body>
 
-<header><h1>🎬 Video AI Tools</h1></header>
+<a class="back" href="index.html">⬅ Back Home</a>
+<h1>🎬 Video AI Tools</h1>
 
-<div class="container">
+<div class="cards">
   <div class="card">
     <h3>Runway</h3>
-    <a href="https://runwayml.com" target="_blank">Visit</a>
+    <p>AI video editing & effects</p>
+    <a href="https://runwayml.com" target="_blank">Choose</a>
   </div>
 
-  <br>
-  <a href="index.html"><button>⬅ Back Home</a></button>
+  <div class="card">
+    <h3>Pika Labs</h3>
+    <p>Text to video AI</p>
+    <a href="https://pika.art" target="_blank">Choose</a>
+  </div>
+
+  <div class="card">
+    <h3>Synthesia</h3>
+    <p>AI avatars & videos</p>
+    <a href="https://synthesia.io" target="_blank">Choose</a>
+  </div>
 </div>
 
 </body>
