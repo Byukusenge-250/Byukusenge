@@ -1,37 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Image AI</title>
+<meta charset="UTF-8">
+<title>Image AI Tools</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#f3f6fc}
-header{background:#2563eb;color:white;padding:20px}
-.container{max-width:900px;margin:auto;padding:20px}
-.card{
-  background:white;padding:15px;margin-top:15px;
-  border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1)
+body{
+  background:linear-gradient(180deg,#0f172a,#020617);
+  color:white;
+  font-family:Segoe UI;
 }
-a{text-decoration:none;color:#2563eb;font-weight:bold}
+h1{text-align:center;padding:40px;}
+.cards{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  padding:20px;
+}
+.card{
+  background:#1e293b;
+  padding:25px;
+  border-radius:22px;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+.card p{color:#cbd5f5;margin:10px 0 20px;}
+.card a{
+  background:#2563eb;
+  padding:10px 22px;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+}
+.back{text-align:center;display:block;color:#93c5fd;margin:20px;}
 </style>
 </head>
 
 <body>
 
-<header><h1>🎨 Image AI Tools</h1></header>
+<a class="back" href="index.html">⬅ Back Home</a>
+<h1>🎨 Image AI Tools</h1>
 
-<div class="container">
+<div class="cards">
   <div class="card">
     <h3>Midjourney</h3>
-    <a href="https://midjourney.com" target="_blank">Visit</a>
+    <p>AI image generation & art</p>
+    <a href="https://midjourney.com" target="_blank">Choose</a>
   </div>
 
   <div class="card">
     <h3>DALL·E</h3>
-    <a href="https://openai.com/dall-e" target="_blank">Visit</a>
+    <p>Create images with AI</p>
+    <a href="https://openai.com/dall-e" target="_blank">Choose</a>
   </div>
 
-  <br>
-  <a href="index.html"><button>⬅ Back Home</button></a>
+  <div class="card">
+    <h3>Leonardo AI</h3>
+    <p>Photo editing & design</p>
+    <a href="https://leonardo.ai" target="_blank">Choose</a>
+  </div>
 </div>
 
 </body>
