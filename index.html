@@ -273,9 +273,31 @@ footer{
   transition:transform 0.5s ease;
   filter:brightness(0.85) saturate(1.2);
 }
-.showcase-card:hover .sc-img-wrap img{
-  transform:scale(1.07);
+/* Gradient card background */
+.sc-gradient{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.5s ease;
+  position:relative;overflow:hidden;
 }
+.sc-grad-emoji{
+  font-size:72px;z-index:1;
+  filter:drop-shadow(0 0 30px rgba(255,255,255,0.25));
+  animation:pulseEmoji 3s ease-in-out infinite;
+}
+@keyframes pulseEmoji{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.sc-gradient::before{
+  content:'';position:absolute;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(255,255,255,0.06);top:-50px;right:-50px;
+}
+.sc-gradient::after{
+  content:'';position:absolute;
+  width:130px;height:130px;border-radius:50%;
+  background:rgba(255,255,255,0.05);bottom:-25px;left:-25px;
+}
+.showcase-card:hover .sc-img-wrap img,
+.showcase-card:hover .sc-gradient{transform:scale(1.06);}
 
 /* Gradient overlay on image */
 .sc-img-wrap::after{
@@ -286,6 +308,7 @@ footer{
     rgba(17,24,39,0.6) 70%,
     rgba(17,24,39,0.95) 100%
   );
+  pointer-events:none;z-index:2;
 }
 
 /* Category tag on image */
@@ -523,7 +546,10 @@ footer{
     <!-- WIDE: ChatGPT -->
     <a class="showcase-card wide reveal" href="https://chat.openai.com" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80" alt="ChatGPT AI">
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#0a0a1a 0%,#10b981 40%,#059669 70%,#065f46 100%);">
+          <span class="sc-grad-emoji">🤖</span>
+          <div class="sc-grad-dots"></div>
+        </div>
         <div class="sc-tag">💬 Chat AI</div>
         <div class="sc-logo">🤖</div>
       </div>
@@ -540,7 +566,9 @@ footer{
     <!-- Midjourney -->
     <a class="showcase-card reveal" href="https://www.midjourney.com" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600&q=80" alt="AI Image Generation">
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#1a0533 0%,#6d28d9 45%,#ec4899 75%,#f59e0b 100%);">
+          <span class="sc-grad-emoji">🎨</span>
+        </div>
         <div class="sc-tag">🎨 Image AI</div>
         <div class="sc-logo">🖼️</div>
       </div>
@@ -557,7 +585,9 @@ footer{
     <!-- Runway -->
     <a class="showcase-card reveal" href="https://runwayml.com" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1536240478700-b869ad10e128?w=600&q=80" alt="AI Video Generation">
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#0f0c29 0%,#1a1a6e 40%,#c94b4b 80%,#4b134f 100%);">
+          <span class="sc-grad-emoji">🎬</span>
+        </div>
         <div class="sc-tag">🎬 Video AI</div>
         <div class="sc-logo">🎬</div>
       </div>
@@ -574,8 +604,10 @@ footer{
     <!-- ElevenLabs -->
     <a class="showcase-card reveal" href="https://elevenlabs.io" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80" alt="AI Music Audio">
-        <div class="sc-tag">🎵 Music AI</div>
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#0a0a1a 0%,#7c3aed 40%,#db2777 75%,#f97316 100%);">
+          <span class="sc-grad-emoji">🎵</span>
+        </div>
+        <div class="sc-tag">🎵 Audio AI</div>
         <div class="sc-logo">🎵</div>
       </div>
       <div class="sc-body">
@@ -591,7 +623,9 @@ footer{
     <!-- Claude -->
     <a class="showcase-card reveal" href="https://claude.ai" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80" alt="Claude AI Anthropic">
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#1a0a00 0%,#c2410c 40%,#ea580c 70%,#fbbf24 100%);">
+          <span class="sc-grad-emoji">🧠</span>
+        </div>
         <div class="sc-tag">🧠 Chat AI</div>
         <div class="sc-logo">🧠</div>
       </div>
@@ -608,7 +642,9 @@ footer{
     <!-- WIDE: Gemini -->
     <a class="showcase-card wide reveal" href="https://gemini.google.com" target="_blank">
       <div class="sc-img-wrap">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Google Gemini AI">
+        <div class="sc-gradient" style="background:linear-gradient(135deg,#0a1628 0%,#1e40af 30%,#2563eb 55%,#06b6d4 80%,#10b981 100%);">
+          <span class="sc-grad-emoji">💎</span>
+        </div>
         <div class="sc-tag">💎 Google AI</div>
         <div class="sc-logo">💎</div>
       </div>
