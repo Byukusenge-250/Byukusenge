@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Video AI Tools</title>
 
 <style>
@@ -14,9 +15,269 @@ h1{text-align:center;padding:40px;}
 .back{text-align:center;display:block;color:#93c5fd;margin:20px;}
 </style>
 </head>
+=======
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video AI Tools – Every AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;color:white;min-height:100vh;background:#020617;overflow-x:hidden;}
+>>>>>>> 0f99a46
+
+/* ─── BACKGROUND ─── */
+.bg-scene{position:fixed;inset:0;z-index:0;overflow:hidden;}
+.bg-scene::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(220,38,38,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(99,102,241,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 10% 70%, rgba(234,88,12,0.12) 0%, transparent 50%),
+    linear-gradient(180deg,#0f0505 0%,#020617 50%,#050210 100%);
+}
+.bg-scene::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(220,38,38,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(220,38,38,0.05) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridMove 20s linear infinite;
+}
+@keyframes gridMove{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:floatOrb linear infinite;pointer-events:none;}
+.orb1{width:500px;height:500px;background:rgba(220,38,38,0.12);top:-100px;left:-100px;animation-duration:25s;}
+.orb2{width:400px;height:400px;background:rgba(99,102,241,0.12);bottom:-100px;right:-100px;animation-duration:30s;animation-delay:-10s;}
+.orb3{width:300px;height:300px;background:rgba(234,88,12,0.1);top:40%;left:55%;animation-duration:22s;animation-delay:-5s;}
+@keyframes floatOrb{
+  0%{transform:translate(0,0) scale(1);}33%{transform:translate(40px,-30px) scale(1.05);}
+  66%{transform:translate(-20px,40px) scale(0.95);}100%{transform:translate(0,0) scale(1);}
+}
+.neural-canvas{position:absolute;inset:0;opacity:0.25;}
+.particle{position:absolute;width:2px;height:2px;background:#fca5a5;border-radius:50%;animation:twinkle ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.1;transform:scale(1);}50%{opacity:0.7;transform:scale(1.5);}}
+
+/* ─── LAYOUT ─── */
+.page{position:relative;z-index:1;}
+
+/* ─── NAVBAR ─── */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(2,6,23,0.75);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-mark{width:44px;height:44px;flex-shrink:0;}
+.nav-logo-text{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:18px;letter-spacing:1px;
+  background:linear-gradient(135deg,#60a5fa,#a78bfa,#22d3ee);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:6px;}
+.nav-links a{
+  color:#94a3b8;text-decoration:none;padding:8px 16px;border-radius:10px;
+  font-size:14px;font-weight:500;transition:all 0.2s;
+}
+.nav-links a:hover{color:white;background:rgba(255,255,255,0.08);}
+.nav-links a.active{color:#f87171;background:rgba(220,38,38,0.1);}
+
+/* ─── HERO ─── */
+.hero{text-align:center;padding:90px 20px 60px;animation:fadeUp 0.6s ease both;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);
+  color:#fca5a5;font-size:13px;font-weight:500;
+  padding:6px 18px;border-radius:999px;margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Orbitron',monospace;font-size:clamp(32px,6vw,62px);
+  font-weight:900;letter-spacing:-1px;line-height:1.1;
+  animation:fadeUp 0.7s ease 0.1s both;
+}
+.hero h1 .grad{
+  background:linear-gradient(135deg,#f87171,#fb923c,#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero p{
+  margin:16px auto 0;font-size:16px;color:#94a3b8;
+  max-width:500px;line-height:1.7;animation:fadeUp 0.7s ease 0.2s both;
+}
+
+/* ─── FILTER TABS ─── */
+.filter-bar{
+  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  margin:40px auto 10px;max-width:800px;padding:0 20px;
+  animation:fadeUp 0.7s ease 0.3s both;
+}
+.filter-btn{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  color:#94a3b8;padding:9px 20px;border-radius:999px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  transition:all 0.2s;font-family:'Inter',sans-serif;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:rgba(220,38,38,0.15);border-color:rgba(220,38,38,0.45);color:white;
+}
+
+/* ─── CONTAINER ─── */
+.container{max-width:1080px;margin:auto;padding:30px 24px 80px;}
+.section-title{
+  font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
+  margin:40px 0 24px;display:flex;align-items:center;gap:12px;letter-spacing:0.5px;
+}
+.section-title::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(220,38,38,0.5),transparent);
+}
+
+/* ─── TOOL CARDS ─── */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+
+.tool-card{
+  background:rgba(17,24,39,0.85);border:1px solid rgba(255,255,255,0.07);
+  border-radius:22px;overflow:hidden;backdrop-filter:blur(12px);
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  display:flex;flex-direction:column;
+}
+.tool-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 30px 60px rgba(0,0,0,0.55),0 0 35px rgba(220,38,38,0.12);
+  border-color:rgba(220,38,38,0.35);
+}
+.tc-img{position:relative;height:190px;overflow:hidden;flex-shrink:0;}
+.tc-gradient{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.5s ease;position:relative;overflow:hidden;
+}
+.tc-grad-emoji{
+  font-size:72px;z-index:1;
+  filter:drop-shadow(0 0 25px rgba(255,255,255,0.2));
+  animation:pulseEmoji 3s ease-in-out infinite;
+}
+@keyframes pulseEmoji{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.tc-gradient::before{
+  content:'';position:absolute;width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,0.06);top:-40px;right:-40px;
+}
+.tc-gradient::after{
+  content:'';position:absolute;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.05);bottom:-20px;left:-20px;
+}
+.tool-card:hover .tc-gradient{transform:scale(1.06);}
+.tc-img::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 40%,rgba(17,24,39,0.9) 100%);
+}
+.tc-tag{
+  position:absolute;top:12px;left:12px;z-index:2;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.12);
+  color:white;font-size:11px;font-weight:600;
+  padding:4px 12px;border-radius:999px;letter-spacing:0.5px;
+}
+.tc-free{
+  position:absolute;top:12px;right:12px;z-index:2;
+  background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);
+  color:#4ade80;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:999px;text-transform:uppercase;
+}
+.tc-paid{
+  position:absolute;top:12px;right:12px;z-index:2;
+  background:rgba(251,146,60,0.2);border:1px solid rgba(251,146,60,0.4);
+  color:#fb923c;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:999px;text-transform:uppercase;
+}
+.tc-rating{
+  position:absolute;bottom:12px;right:12px;z-index:2;
+  font-size:12px;color:#fbbf24;font-weight:600;
+  background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);
+  padding:3px 10px;border-radius:999px;
+}
+.tc-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;}
+.tc-name{font-family:'Orbitron',monospace;font-size:17px;font-weight:700;margin-bottom:6px;}
+.tc-tagline{font-size:12px;color:#f87171;font-weight:600;margin-bottom:10px;letter-spacing:0.3px;}
+.tc-desc{font-size:13px;color:#94a3b8;line-height:1.7;flex:1;margin-bottom:18px;}
+.tc-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.tc-feat{
+  font-size:11px;color:#cbd5e1;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  padding:4px 10px;border-radius:999px;
+}
+.tc-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,rgba(220,38,38,0.2),rgba(234,88,12,0.2));
+  border:1px solid rgba(220,38,38,0.4);
+  color:white;padding:11px 20px;border-radius:14px;
+  text-decoration:none;font-weight:700;font-size:13px;
+  font-family:'Orbitron',monospace;letter-spacing:0.5px;transition:all 0.25s;
+}
+.tc-btn:hover{
+  background:linear-gradient(135deg,rgba(220,38,38,0.5),rgba(234,88,12,0.5));
+  box-shadow:0 8px 25px rgba(220,38,38,0.3);transform:translateY(-1px);
+}
+
+/* FEATURED */
+.tool-card.featured{grid-column:span 2;flex-direction:row;}
+.tool-card.featured .tc-img{width:42%;height:auto;flex-shrink:0;}
+.tool-card.featured .tc-body{padding:30px;}
+.tool-card.featured .tc-name{font-size:22px;}
+.tool-card.featured .tc-desc{font-size:14px;}
+
+/* STATS */
+.stats-bar{
+  display:flex;justify-content:center;gap:50px;flex-wrap:wrap;
+  max-width:700px;margin:50px auto;padding:30px 20px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:20px;backdrop-filter:blur(10px);
+}
+.stat{text-align:center;}
+.stat-num{
+  font-family:'Orbitron',monospace;font-size:30px;font-weight:900;
+  background:linear-gradient(135deg,#f87171,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:11px;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:40px 20px;color:#475569;font-size:13px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-logo{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:16px;
+  background:linear-gradient(135deg,#60a5fa,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:700px){
+  nav{padding:14px 18px;}
+  .nav-links a{padding:7px 8px;font-size:12px;}
+  .tool-card.featured{grid-column:span 1;flex-direction:column;}
+  .tool-card.featured .tc-img{width:100%;height:190px;}
+  .stats-bar{gap:28px;}
+}
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NVY3HM11F"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-7NVY3HM11F');
+</script>
+</head>
 <body>
 
+<<<<<<< HEAD
 <a class="back" href="index.html">⬅ Back Home</a>
 <h1>🎬 Video AI Tools</h1>
 
@@ -38,7 +299,364 @@ h1{text-align:center;padding:40px;}
     <p>AI avatars & videos</p>
     <a href="https://synthesia.io" target="_blank">Choose</a>
   </div>
+=======
+<div class="bg-scene">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <canvas class="neural-canvas" id="neuralCanvas"></canvas>
+>>>>>>> 0f99a46
 </div>
 
+<div class="page">
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-mark" id="svgLogo" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+      <path d="M22 2 L40 12 L40 32 L22 42 L4 32 L4 12 Z" fill="url(#lg1)" opacity="0.15"/>
+      <path d="M22 2 L40 12 L40 32 L22 42 L4 32 L4 12 Z" stroke="url(#lg1)" stroke-width="1.5" fill="none"/>
+      <circle cx="22" cy="14" r="3" fill="url(#lg1)"/>
+      <circle cx="13" cy="22" r="2.5" fill="#6366f1" opacity="0.9"/>
+      <circle cx="31" cy="22" r="2.5" fill="#06b6d4" opacity="0.9"/>
+      <circle cx="17" cy="30" r="2" fill="#8b5cf6" opacity="0.8"/>
+      <circle cx="27" cy="30" r="2" fill="#3b82f6" opacity="0.8"/>
+      <line x1="22" y1="14" x2="13" y2="22" stroke="url(#lg1)" stroke-width="1.2" opacity="0.7"/>
+      <line x1="22" y1="14" x2="31" y2="22" stroke="url(#lg1)" stroke-width="1.2" opacity="0.7"/>
+      <line x1="13" y1="22" x2="17" y2="30" stroke="#6366f1" stroke-width="1.2" opacity="0.7"/>
+      <line x1="31" y1="22" x2="27" y2="30" stroke="#06b6d4" stroke-width="1.2" opacity="0.7"/>
+      <line x1="13" y1="22" x2="31" y2="22" stroke="url(#lg1)" stroke-width="1" opacity="0.4"/>
+      <line x1="17" y1="30" x2="27" y2="30" stroke="url(#lg1)" stroke-width="1" opacity="0.4"/>
+      <circle cx="22" cy="22" r="1.5" fill="white" opacity="0.9"/>
+    </svg>
+    <img src="logo.png" alt="Every AI" id="pngLogo" style="height:44px;width:auto;display:none;border-radius:10px;"
+      onload="document.getElementById('svgLogo').style.display='none';this.style.display='block'">
+    <span class="nav-logo-text">EVERY AI</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="image.html">🎨 Image</a>
+    <a href="video.html" class="active">🎬 Video</a>
+    <a href="music.html">🎵 Music</a>
+    <a href="contact.html">✉️ Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🎬 Video AI Tools</div>
+  <h1>Create <span class="grad">Cinematic Videos</span><br>with AI</h1>
+  <p>Discover the best AI tools for generating, editing, and transforming videos — from text-to-video to Hollywood-level post-production.</p>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Video Tools</div></div>
+  <div class="stat"><div class="stat-num">4K</div><div class="stat-label">Max Output</div></div>
+  <div class="stat"><div class="stat-num">60fps</div><div class="stat-label">Smooth Video</div></div>
+  <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Options Available</div></div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all',this)">✨ All Tools</button>
+  <button class="filter-btn" onclick="filterCards('generate',this)">🎬 Text-to-Video</button>
+  <button class="filter-btn" onclick="filterCards('edit',this)">✂️ Edit & Effects</button>
+  <button class="filter-btn" onclick="filterCards('avatar',this)">🧑 AI Avatar</button>
+  <button class="filter-btn" onclick="filterCards('free',this)">🆓 Free</button>
+</div>
+
+<!-- TOOLS -->
+<div class="container">
+  <div class="section-title">🔥 Top Video AI Tools</div>
+  <div class="tools-grid" id="toolsGrid">
+
+    <!-- FEATURED: Runway -->
+    <div class="tool-card featured reveal" data-cat="generate edit">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0f0c29,#1a1a6e 40%,#c94b4b 75%,#4b134f 100%);">
+          <span class="tc-grad-emoji">🎬</span>
+        </div>
+        <div class="tc-tag">🎬 Text-to-Video</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Runway ML</div>
+        <div class="tc-tagline">Hollywood AI Video Generator</div>
+        <div class="tc-desc">Runway is the most powerful AI video platform in the world. Used by major film studios and top content creators, it can generate stunning videos from text, remove backgrounds in real-time, apply visual effects, and transform any image into a moving video clip. Gen-2 and Gen-3 models produce jaw-dropping results in seconds.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Text-to-Video</span>
+          <span class="tc-feat">Image-to-Video</span>
+          <span class="tc-feat">Background Remove</span>
+          <span class="tc-feat">Gen-3 Alpha</span>
+          <span class="tc-feat">4K Export</span>
+        </div>
+        <a class="tc-btn" href="https://runwayml.com" target="_blank">🚀 Visit Runway ML</a>
+      </div>
+    </div>
+
+    <!-- Sora -->
+    <div class="tool-card reveal" data-cat="generate">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#000000,#10b981 50%,#065f46 100%);">
+          <span class="tc-grad-emoji">🌌</span>
+        </div>
+        <div class="tc-tag">🤖 OpenAI</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Sora by OpenAI</div>
+        <div class="tc-tagline">The Future of Video Generation</div>
+        <div class="tc-desc">Sora creates photorealistic videos up to 60 seconds long from simple text descriptions. OpenAI's groundbreaking model understands physics, motion, and storytelling at a level never seen before.</div>
+        <div class="tc-features">
+          <span class="tc-feat">60s Videos</span>
+          <span class="tc-feat">Photorealistic</span>
+          <span class="tc-feat">Physics-Aware</span>
+        </div>
+        <a class="tc-btn" href="https://sora.com" target="_blank">🚀 Try Sora</a>
+      </div>
+    </div>
+
+    <!-- Pika Labs -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1e0a3c,#7c3aed 50%,#c026d3 100%);">
+          <span class="tc-grad-emoji">⚡</span>
+        </div>
+        <div class="tc-tag">⚡ Fast AI</div>
+        <div class="tc-free">Free Plan</div>
+        <div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Pika Labs</div>
+        <div class="tc-tagline">Fast & Fun AI Video Maker</div>
+        <div class="tc-desc">Pika Labs lets anyone create amazing AI-generated videos from text or images in seconds. With a generous free tier, Pika is perfect for creators, marketers, and beginners exploring AI video.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Text-to-Video</span>
+          <span class="tc-feat">Img-to-Video</span>
+          <span class="tc-feat">Free Tier</span>
+        </div>
+        <a class="tc-btn" href="https://pika.art" target="_blank">🚀 Try Pika</a>
+      </div>
+    </div>
+
+    <!-- Synthesia -->
+    <div class="tool-card reveal" data-cat="avatar">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a2a4a,#1e6091 50%,#2980b9 100%);">
+          <span class="tc-grad-emoji">🧑</span>
+        </div>
+        <div class="tc-tag">🧑 AI Avatar</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Synthesia</div>
+        <div class="tc-tagline">#1 AI Avatar Video Platform</div>
+        <div class="tc-desc">Synthesia creates professional videos with AI avatars that speak your script in 130+ languages. Used by top companies for training videos, product demos, and corporate communications — no camera needed.</div>
+        <div class="tc-features">
+          <span class="tc-feat">130+ Languages</span>
+          <span class="tc-feat">AI Avatars</span>
+          <span class="tc-feat">No Camera</span>
+        </div>
+        <a class="tc-btn" href="https://www.synthesia.io" target="_blank">🚀 Try Synthesia</a>
+      </div>
+    </div>
+
+    <!-- HeyGen -->
+    <div class="tool-card reveal" data-cat="avatar">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1a0a2e,#6d28d9 45%,#9333ea 80%,#c026d3 100%);">
+          <span class="tc-grad-emoji">🎭</span>
+        </div>
+        <div class="tc-tag">🎭 AI Avatar</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">HeyGen</div>
+        <div class="tc-tagline">Personalized AI Video at Scale</div>
+        <div class="tc-desc">HeyGen creates hyper-personalized AI avatar videos at scale. Clone your own voice and likeness, translate videos into 40+ languages with lip-sync, and generate thousands of personalized messages.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Voice Clone</span>
+          <span class="tc-feat">Lip Sync</span>
+          <span class="tc-feat">40+ Languages</span>
+        </div>
+        <a class="tc-btn" href="https://www.heygen.com" target="_blank">🚀 Try HeyGen</a>
+      </div>
+    </div>
+
+    <!-- Kling AI -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0a1e,#1e3a5f 40%,#00bcd4 85%,#004d5e 100%);">
+          <span class="tc-grad-emoji">🌊</span>
+        </div>
+        <div class="tc-tag">🌊 Text-to-Video</div>
+        <div class="tc-free">Free Plan</div>
+        <div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Kling AI</div>
+        <div class="tc-tagline">China's Most Powerful Video AI</div>
+        <div class="tc-desc">Kling AI generates cinema-quality videos up to 3 minutes long. With advanced motion understanding and physics simulation, it creates smooth and realistic video clips from simple text or image inputs.</div>
+        <div class="tc-features">
+          <span class="tc-feat">3-Min Videos</span>
+          <span class="tc-feat">Physics AI</span>
+          <span class="tc-feat">Free Credits</span>
+        </div>
+        <a class="tc-btn" href="https://klingai.com" target="_blank">🚀 Try Kling AI</a>
+      </div>
+    </div>
+
+    <!-- CapCut AI -->
+    <div class="tool-card reveal" data-cat="edit free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#000000,#111111 30%,#333333 60%,#555555 100%);">
+          <span class="tc-grad-emoji">✂️</span>
+        </div>
+        <div class="tc-tag">✂️ Edit & Effects</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">CapCut AI</div>
+        <div class="tc-tagline">The TikTok Video Editor Powered by AI</div>
+        <div class="tc-desc">CapCut is the world's most popular free video editor with powerful AI features — auto captions, background removal, AI effects, smart cut, and trending templates. Used by over 200 million creators globally.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Auto Captions</span>
+          <span class="tc-feat">AI Effects</span>
+          <span class="tc-feat">200M+ Users</span>
+        </div>
+        <a class="tc-btn" href="https://www.capcut.com" target="_blank">🚀 Try CapCut</a>
+      </div>
+    </div>
+
+    <!-- InVideo AI -->
+    <div class="tool-card reveal" data-cat="generate edit free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1a0533,#6d28d9 40%,#2563eb 75%,#0ea5e9 100%);">
+          <span class="tc-grad-emoji">📹</span>
+        </div>
+        <div class="tc-tag">📹 AI Video Maker</div>
+        <div class="tc-free">Free Plan</div>
+        <div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">InVideo AI</div>
+        <div class="tc-tagline">Turn Scripts into Videos Instantly</div>
+        <div class="tc-desc">Type your script or idea and InVideo AI instantly creates a complete video with voiceover, stock footage, music, and subtitles. Perfect for YouTubers, marketers, and content creators who want fast results.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Script-to-Video</span>
+          <span class="tc-feat">Stock Library</span>
+          <span class="tc-feat">Auto Voiceover</span>
+        </div>
+        <a class="tc-btn" href="https://invideo.io" target="_blank">🚀 Try InVideo AI</a>
+      </div>
+    </div>
+
+    <!-- Luma Dream Machine -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0a0a,#1a1a2e 35%,#ff6b6b 70%,#ffd93d 100%);">
+          <span class="tc-grad-emoji">💫</span>
+        </div>
+        <div class="tc-tag">💫 Dream Machine</div>
+        <div class="tc-free">Free Plan</div>
+        <div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Luma Dream Machine</div>
+        <div class="tc-tagline">Photorealistic AI Video Generation</div>
+        <div class="tc-desc">Luma's Dream Machine generates smooth, photorealistic video clips from text or images. Known for its exceptional motion quality and camera movement, it's a favorite among filmmakers and VFX artists.</div>
+        <div class="tc-features">
+          <span class="tc-feat">Photorealistic</span>
+          <span class="tc-feat">Camera Control</span>
+          <span class="tc-feat">Free Credits</span>
+        </div>
+        <a class="tc-btn" href="https://lumalabs.ai/dream-machine" target="_blank">🚀 Try Luma</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EVERY AI</div>
+  <p>© 2026 Every AI · Gateway to all AI tools</p>
+</footer>
+</div>
+
+<script>
+/* NEURAL CANVAS */
+const canvas=document.getElementById('neuralCanvas');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const nodes=[];
+for(let i=0;i<55;i++){
+  nodes.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+    vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,r:Math.random()*2.5+1,pulse:Math.random()*Math.PI*2});
+}
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const t=Date.now()*0.001;
+  nodes.forEach(n=>{
+    n.x+=n.vx;n.y+=n.vy;
+    if(n.x<0||n.x>canvas.width)n.vx*=-1;
+    if(n.y<0||n.y>canvas.height)n.vy*=-1;
+    n.pulse+=0.03;
+  });
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<150){
+        ctx.strokeStyle=`hsla(${10+Math.sin(t*0.3)*10},80%,60%,${(1-dist/150)*0.2})`;
+        ctx.lineWidth=0.8;ctx.beginPath();
+        ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n=>{
+    const glow=(Math.sin(n.pulse)+1)/2;
+    const hue=5+Math.sin(t+n.pulse)*15;
+    ctx.shadowColor=`hsl(${hue},80%,65%)`;ctx.shadowBlur=8*glow;
+    ctx.fillStyle=`hsla(${hue},70%,70%,${0.4+glow*0.5})`;
+    ctx.beginPath();ctx.arc(n.x,n.y,n.r*(0.8+glow*0.4),0,Math.PI*2);ctx.fill();
+  });
+  ctx.shadowBlur=0;requestAnimationFrame(draw);
+}
+draw();
+
+/* PARTICLES */
+for(let i=0;i<70;i++){
+  const p=document.createElement('div');p.className='particle';
+  p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*0.3};`;
+  document.querySelector('.bg-scene').appendChild(p);
+}
+
+/* REVEAL */
+const revealEls=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80);});
+},{threshold:0.08});
+revealEls.forEach(el=>observer.observe(el));
+
+/* FILTER */
+function filterCards(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.tool-card').forEach(card=>{
+    card.style.display=(cat==='all'||card.dataset.cat.includes(cat))?'flex':'none';
+  });
+}
+</script>
 </body>
 </html>
