@@ -94,7 +94,7 @@ nav{
 /* ─── FILTER TABS ─── */
 .filter-bar{
   display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
-  margin:40px auto 10px;max-width:800px;padding:0 20px;
+  margin:40px auto 10px;max-width:900px;padding:0 20px;
   animation:fadeUp 0.7s ease 0.3s both;
 }
 .filter-btn{
@@ -109,7 +109,7 @@ nav{
 }
 
 /* ─── CONTAINER ─── */
-.container{max-width:1080px;margin:auto;padding:30px 24px 80px;}
+.container{max-width:1200px;margin:auto;padding:30px 24px 80px;}
 
 .section-title{
   font-family:'Orbitron',monospace;font-size:18px;font-weight:700;
@@ -120,14 +120,13 @@ nav{
   background:linear-gradient(90deg,rgba(236,72,153,0.5),transparent);
 }
 
-/* ─── IMAGE TOOL CARDS GRID ─── */
+/* ─── TOOLS GRID ─── */
 .tools-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:22px;
 }
 
-/* Big featured card */
 .tool-card{
   background:rgba(17,24,39,0.85);
   border:1px solid rgba(255,255,255,0.07);
@@ -142,20 +141,13 @@ nav{
   border-color:rgba(236,72,153,0.35);
 }
 
-/* Image area */
 .tc-img{
-  position:relative;height:190px;overflow:hidden;flex-shrink:0;
-}
-.tc-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform 0.5s ease;
-  filter:brightness(0.82) saturate(1.3);
+  position:relative;height:170px;overflow:hidden;flex-shrink:0;
 }
 .tc-img-bg{
   width:100%;height:100%;
   transition:transform 0.5s ease;
 }
-.tool-card:hover .tc-img img,
 .tool-card:hover .tc-img-bg{transform:scale(1.06);}
 .tc-img::after{
   content:'';position:absolute;inset:0;
@@ -163,7 +155,6 @@ nav{
   pointer-events:none;
 }
 
-/* Overlay top bar */
 .tc-tag{
   position:absolute;top:12px;left:12px;z-index:2;
   background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);
@@ -183,8 +174,13 @@ nav{
   color:#fb923c;font-size:10px;font-weight:700;
   padding:4px 10px;border-radius:999px;letter-spacing:0.5px;text-transform:uppercase;
 }
+.tc-freemium{
+  position:absolute;top:12px;right:12px;z-index:2;
+  background:rgba(96,165,250,0.2);border:1px solid rgba(96,165,250,0.4);
+  color:#60a5fa;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:999px;letter-spacing:0.5px;text-transform:uppercase;
+}
 
-/* Stars rating */
 .tc-rating{
   position:absolute;bottom:12px;right:12px;z-index:2;
   font-size:12px;color:#fbbf24;font-weight:600;
@@ -192,30 +188,28 @@ nav{
   padding:3px 10px;border-radius:999px;
 }
 
-/* Card body */
-.tc-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;}
+.tc-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;}
 .tc-name{
-  font-family:'Orbitron',monospace;font-size:17px;font-weight:700;
-  margin-bottom:6px;
+  font-family:'Orbitron',monospace;font-size:15px;font-weight:700;
+  margin-bottom:5px;
 }
-.tc-tagline{font-size:12px;color:#f472b6;font-weight:600;margin-bottom:10px;letter-spacing:0.3px;}
-.tc-desc{font-size:13px;color:#94a3b8;line-height:1.7;flex:1;margin-bottom:18px;}
+.tc-tagline{font-size:11px;color:#f472b6;font-weight:600;margin-bottom:9px;letter-spacing:0.3px;}
+.tc-desc{font-size:12px;color:#94a3b8;line-height:1.7;flex:1;margin-bottom:15px;}
 
-/* Features list */
-.tc-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.tc-features{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:15px;}
 .tc-feat{
-  font-size:11px;color:#cbd5e1;
+  font-size:10px;color:#cbd5e1;
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
-  padding:4px 10px;border-radius:999px;
+  padding:3px 9px;border-radius:999px;
 }
 
 .tc-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
   background:linear-gradient(135deg,rgba(236,72,153,0.2),rgba(168,85,247,0.2));
   border:1px solid rgba(236,72,153,0.4);
-  color:white;padding:11px 20px;border-radius:14px;
-  text-decoration:none;font-weight:700;font-size:13px;
+  color:white;padding:10px 18px;border-radius:12px;
+  text-decoration:none;font-weight:700;font-size:12px;
   font-family:'Orbitron',monospace;letter-spacing:0.5px;
   transition:all 0.25s;
 }
@@ -225,23 +219,17 @@ nav{
   transform:translateY(-1px);
 }
 
-/* ─── FEATURED WIDE CARD ─── */
-.tool-card.featured{
-  grid-column:span 2;flex-direction:row;
-}
-.tool-card.featured .tc-img{width:45%;height:auto;flex-shrink:0;}
-.tool-card.featured .tc-body{padding:28px;}
-.tool-card.featured .tc-name{font-size:22px;}
-.tool-card.featured .tc-desc{font-size:14px;}
-
-/* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+/* Featured wide card */
+.tool-card.featured{grid-column:span 2;flex-direction:row;}
+.tool-card.featured .tc-img{width:42%;height:auto;flex-shrink:0;}
+.tool-card.featured .tc-body{padding:26px;}
+.tool-card.featured .tc-name{font-size:20px;}
+.tool-card.featured .tc-desc{font-size:13px;}
 
 /* ─── STATS BAR ─── */
 .stats-bar{
   display:flex;justify-content:center;gap:50px;flex-wrap:wrap;
-  max-width:700px;margin:50px auto;
+  max-width:800px;margin:50px auto;
   padding:30px 20px;
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.07);
@@ -254,6 +242,10 @@ nav{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .stat-label{font-size:11px;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ─── FOOTER ─── */
 footer{
@@ -273,22 +265,14 @@ footer{
   nav{padding:14px 18px;}
   .nav-links a{padding:7px 8px;font-size:12px;}
   .tool-card.featured{grid-column:span 1;flex-direction:column;}
-  .tool-card.featured .tc-img{width:100%;height:190px;}
+  .tool-card.featured .tc-img{width:100%;height:170px;}
   .stats-bar{gap:28px;}
 }
 </style>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NVY3HM11F"></script>
-<script>
-  window.dataLayer=window.dataLayer||[];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());gtag('config','G-7NVY3HM11F');
-</script>
 </head>
 
 <body>
 
-<!-- ─── BACKGROUND ─── -->
 <div class="bg-scene">
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
@@ -298,10 +282,10 @@ footer{
 
 <div class="page">
 
-<!-- ─── NAVBAR ─── -->
+<!-- NAVBAR -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg class="logo-mark" id="svgLogo" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stop-color="#3b82f6"/>
@@ -324,9 +308,6 @@ footer{
       <line x1="17" y1="30" x2="27" y2="30" stroke="url(#lg1)" stroke-width="1" opacity="0.4"/>
       <circle cx="22" cy="22" r="1.5" fill="white" opacity="0.9"/>
     </svg>
-    <img src="logo.png" alt="Every AI" id="pngLogo"
-      style="height:44px;width:auto;display:none;border-radius:10px;"
-      onload="document.getElementById('svgLogo').style.display='none';this.style.display='block'">
     <span class="nav-logo-text">EVERY AI</span>
   </a>
   <div class="nav-links">
@@ -338,39 +319,43 @@ footer{
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">🎨 Image AI Tools</div>
   <h1>Create <span class="grad">Stunning Images</span><br>with AI</h1>
-  <p>Discover the best AI tools for generating, editing, and enhancing images — from realistic photos to breathtaking digital art.</p>
+  <p>Discover 30+ best AI tools for generating, editing, and enhancing images — from realistic photos to breathtaking digital art.</p>
 </section>
 
-<!-- ─── STATS BAR ─── -->
+<!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Image Tools</div></div>
+  <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Image Tools</div></div>
   <div class="stat"><div class="stat-num">4K</div><div class="stat-label">Max Resolution</div></div>
   <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Options Available</div></div>
   <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Creativity</div></div>
 </div>
 
-<!-- ─── FILTER TABS ─── */
+<!-- FILTER TABS -->
 <div class="filter-bar">
   <button class="filter-btn active" onclick="filterCards('all',this)">✨ All Tools</button>
   <button class="filter-btn" onclick="filterCards('generate',this)">🖼️ Generate</button>
   <button class="filter-btn" onclick="filterCards('edit',this)">✏️ Edit & Enhance</button>
+  <button class="filter-btn" onclick="filterCards('upscale',this)">🔍 Upscale</button>
+  <button class="filter-btn" onclick="filterCards('avatar',this)">🧑 Avatar</button>
   <button class="filter-btn" onclick="filterCards('free',this)">🆓 Free</button>
   <button class="filter-btn" onclick="filterCards('paid',this)">💎 Premium</button>
 </div>
 
-<!-- ─── TOOLS GRID ─── -->
+<!-- TOOLS GRID -->
 <div class="container">
-  <div class="section-title">🔥 Top Image AI Tools</div>
+
+  <!-- SECTION 1: TOP GENERATORS -->
+  <div class="section-title">🔥 Top AI Image Generators</div>
   <div class="tools-grid" id="toolsGrid">
 
     <!-- FEATURED: Midjourney -->
     <div class="tool-card featured reveal" data-cat="generate paid">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a0533,#6d28d9 40%,#ec4899 70%,#f59e0b);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🎨</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a0533,#6d28d9 40%,#ec4899 70%,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:72px;">🎨</div>
         <div class="tc-tag">🎨 Text-to-Image</div>
         <div class="tc-paid">Premium</div>
         <div class="tc-rating">⭐ 4.9</div>
@@ -380,10 +365,8 @@ footer{
         <div class="tc-tagline">The World's #1 AI Art Generator</div>
         <div class="tc-desc">Midjourney transforms your words into breathtaking, hyper-realistic artwork and stunning digital illustrations. Used by top designers, game studios, and creative agencies worldwide. Simply type a prompt and watch it become a masterpiece in seconds.</div>
         <div class="tc-features">
-          <span class="tc-feat">Text-to-Image</span>
-          <span class="tc-feat">4K Quality</span>
-          <span class="tc-feat">Multiple Styles</span>
-          <span class="tc-feat">Discord Bot</span>
+          <span class="tc-feat">Text-to-Image</span><span class="tc-feat">4K Quality</span>
+          <span class="tc-feat">Multiple Styles</span><span class="tc-feat">Discord Bot</span>
           <span class="tc-feat">Commercial Use</span>
         </div>
         <a class="tc-btn" href="https://www.midjourney.com" target="_blank">🚀 Visit Midjourney</a>
@@ -393,20 +376,14 @@ footer{
     <!-- DALL·E 3 -->
     <div class="tool-card reveal" data-cat="generate paid">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0a0a2e,#00d2ff 60%,#3a7bd5);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🤖</div>
-        <div class="tc-tag">🤖 OpenAI</div>
-        <div class="tc-paid">Premium</div>
-        <div class="tc-rating">⭐ 4.8</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0a0a2e,#00d2ff 60%,#3a7bd5);display:flex;align-items:center;justify-content:center;font-size:60px;">🤖</div>
+        <div class="tc-tag">🤖 OpenAI</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.8</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">DALL·E 3</div>
         <div class="tc-tagline">OpenAI's Flagship Image Generator</div>
         <div class="tc-desc">DALL·E 3 creates photorealistic images and artistic illustrations from detailed text prompts. Deeply integrated into ChatGPT for a seamless creative experience.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Photorealistic</span>
-          <span class="tc-feat">ChatGPT Built-in</span>
-          <span class="tc-feat">Fast Generation</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Photorealistic</span><span class="tc-feat">ChatGPT Built-in</span><span class="tc-feat">Fast Generation</span></div>
         <a class="tc-btn" href="https://openai.com/dall-e-3" target="_blank">🚀 Try DALL·E 3</a>
       </div>
     </div>
@@ -414,21 +391,14 @@ footer{
     <!-- Stable Diffusion -->
     <div class="tool-card reveal" data-cat="generate free">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">⚡</div>
-        <div class="tc-tag">⚡ Open Source</div>
-        <div class="tc-free">Free</div>
-        <div class="tc-rating">⭐ 4.7</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);display:flex;align-items:center;justify-content:center;font-size:60px;">⚡</div>
+        <div class="tc-tag">⚡ Open Source</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.7</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Stable Diffusion</div>
         <div class="tc-tagline">Open-Source Powerhouse</div>
-        <div class="tc-desc">The most powerful open-source image generator available. Run it locally on your own computer or use online platforms. Fully customizable with thousands of community models.</div>
-        <div class="tc-features">
-          <span class="tc-feat">100% Free</span>
-          <span class="tc-feat">Open Source</span>
-          <span class="tc-feat">Local Run</span>
-          <span class="tc-feat">Custom Models</span>
-        </div>
+        <div class="tc-desc">The most powerful open-source image generator. Run it locally on your own computer or use online platforms. Fully customizable with thousands of community models.</div>
+        <div class="tc-features"><span class="tc-feat">100% Free</span><span class="tc-feat">Open Source</span><span class="tc-feat">Local Run</span><span class="tc-feat">Custom Models</span></div>
         <a class="tc-btn" href="https://stability.ai" target="_blank">🚀 Try Now</a>
       </div>
     </div>
@@ -436,20 +406,14 @@ footer{
     <!-- Leonardo AI -->
     <div class="tool-card reveal" data-cat="generate free">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a1a2e,#e94560 50%,#f5a623);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🦁</div>
-        <div class="tc-tag">🦁 Leonardo</div>
-        <div class="tc-free">Free Plan</div>
-        <div class="tc-rating">⭐ 4.7</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a1a2e,#e94560 50%,#f5a623);display:flex;align-items:center;justify-content:center;font-size:60px;">🦁</div>
+        <div class="tc-tag">🦁 Leonardo</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.7</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Leonardo AI</div>
         <div class="tc-tagline">Pro-Grade AI Art for Creators</div>
         <div class="tc-desc">Generate game assets, concept art, and photorealistic images with fine-tuned AI models. Leonardo offers a generous free tier and powerful tools for professional creators.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Game Assets</span>
-          <span class="tc-feat">Fine-Tuning</span>
-          <span class="tc-feat">150 Free Credits</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Game Assets</span><span class="tc-feat">Fine-Tuning</span><span class="tc-feat">150 Free Credits</span></div>
         <a class="tc-btn" href="https://leonardo.ai" target="_blank">🚀 Try Leonardo</a>
       </div>
     </div>
@@ -457,83 +421,200 @@ footer{
     <!-- Adobe Firefly -->
     <div class="tool-card reveal" data-cat="generate edit paid">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a0000,#ff416c,#ff4b2b);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🔥</div>
-        <div class="tc-tag">🔥 Adobe</div>
-        <div class="tc-paid">Premium</div>
-        <div class="tc-rating">⭐ 4.6</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a0000,#ff416c,#ff4b2b);display:flex;align-items:center;justify-content:center;font-size:60px;">🔥</div>
+        <div class="tc-tag">🔥 Adobe</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.6</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Adobe Firefly</div>
         <div class="tc-tagline">AI Inside Your Creative Suite</div>
         <div class="tc-desc">Adobe's AI image generator built directly into Photoshop, Illustrator, and Express. Generate, fill, and extend images with simple text prompts — commercially safe for professional use.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Photoshop Native</span>
-          <span class="tc-feat">Commercial Safe</span>
-          <span class="tc-feat">Generative Fill</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Photoshop Native</span><span class="tc-feat">Commercial Safe</span><span class="tc-feat">Generative Fill</span></div>
         <a class="tc-btn" href="https://firefly.adobe.com" target="_blank">🚀 Try Firefly</a>
-      </div>
-    </div>
-
-    <!-- Canva AI -->
-    <div class="tool-card reveal" data-cat="edit generate free">
-      <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#00b09b,#96c93d 60%,#00b09b);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">✏️</div>
-        <div class="tc-tag">✏️ Design</div>
-        <div class="tc-free">Free Plan</div>
-        <div class="tc-rating">⭐ 4.6</div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-name">Canva AI</div>
-        <div class="tc-tagline">Design + AI in One Platform</div>
-        <div class="tc-desc">Canva combines a drag-and-drop design editor with powerful AI tools — generate images, remove backgrounds, expand photos, and create professional designs in minutes.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Background Remove</span>
-          <span class="tc-feat">Magic Edit</span>
-          <span class="tc-feat">Templates</span>
-        </div>
-        <a class="tc-btn" href="https://www.canva.com/ai-image-generator/" target="_blank">🚀 Try Canva AI</a>
       </div>
     </div>
 
     <!-- Ideogram -->
     <div class="tool-card reveal" data-cat="generate free">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">✍️</div>
-        <div class="tc-tag">✍️ Text in Images</div>
-        <div class="tc-free">Free</div>
-        <div class="tc-rating">⭐ 4.5</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);display:flex;align-items:center;justify-content:center;font-size:60px;">✍️</div>
+        <div class="tc-tag">✍️ Text in Images</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.5</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Ideogram AI</div>
         <div class="tc-tagline">AI That Gets Text Right</div>
         <div class="tc-desc">Ideogram is the best AI image tool for generating images that include readable, accurate text. Perfect for creating posters, logos, banners, and typography-focused designs.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Text Accuracy</span>
-          <span class="tc-feat">Poster Design</span>
-          <span class="tc-feat">Logo Generation</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Text Accuracy</span><span class="tc-feat">Poster Design</span><span class="tc-feat">Logo Generation</span></div>
         <a class="tc-btn" href="https://ideogram.ai" target="_blank">🚀 Try Ideogram</a>
       </div>
     </div>
 
+    <!-- Flux AI -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#000428,#004e92,#00c6ff);display:flex;align-items:center;justify-content:center;font-size:60px;">💫</div>
+        <div class="tc-tag">💫 Flux</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Flux AI</div>
+        <div class="tc-tagline">Next-Gen Open Image Model</div>
+        <div class="tc-desc">Flux by Black Forest Labs is one of the best open-source image generation models available. Known for incredibly detailed, accurate images with excellent prompt following.</div>
+        <div class="tc-features"><span class="tc-feat">High Detail</span><span class="tc-feat">Open Source</span><span class="tc-feat">Fast</span><span class="tc-feat">Prompt Accurate</span></div>
+        <a class="tc-btn" href="https://blackforestlabs.ai" target="_blank">🚀 Try Flux</a>
+      </div>
+    </div>
+
+    <!-- Playground AI -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a1a1a,#6441a5,#2a0845);display:flex;align-items:center;justify-content:center;font-size:60px;">🛝</div>
+        <div class="tc-tag">🛝 Playground</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Playground AI</div>
+        <div class="tc-tagline">Free Unlimited AI Images</div>
+        <div class="tc-desc">Playground AI offers free unlimited image generation with multiple models. Mix real and AI-generated elements, and edit photos with natural language commands.</div>
+        <div class="tc-features"><span class="tc-feat">Unlimited Free</span><span class="tc-feat">Multiple Models</span><span class="tc-feat">Photo Editing</span></div>
+        <a class="tc-btn" href="https://playground.com" target="_blank">🚀 Try Playground</a>
+      </div>
+    </div>
+
+    <!-- NightCafe -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0d0d0d,#1a1a2e,#16213e,#0f3460);display:flex;align-items:center;justify-content:center;font-size:60px;">🌙</div>
+        <div class="tc-tag">🌙 NightCafe</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">NightCafe Creator</div>
+        <div class="tc-tagline">AI Art Generator & Community</div>
+        <div class="tc-desc">NightCafe offers multiple AI art generation algorithms and a thriving creative community. Run daily challenges, share your art, and earn free credits to generate more.</div>
+        <div class="tc-features"><span class="tc-feat">Community</span><span class="tc-feat">Multiple Styles</span><span class="tc-feat">Daily Credits</span></div>
+        <a class="tc-btn" href="https://creator.nightcafe.studio" target="_blank">🚀 Try NightCafe</a>
+      </div>
+    </div>
+
+    <!-- DreamStudio -->
+    <div class="tool-card reveal" data-cat="generate paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a0533,#4c1d95,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:60px;">💭</div>
+        <div class="tc-tag">💭 Stability AI</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">DreamStudio</div>
+        <div class="tc-tagline">Official Stable Diffusion Web App</div>
+        <div class="tc-desc">DreamStudio is the official web interface for Stable Diffusion by Stability AI. Fine-tune every parameter of your image generation for maximum creative control.</div>
+        <div class="tc-features"><span class="tc-feat">Fine Control</span><span class="tc-feat">Style Presets</span><span class="tc-feat">API Access</span></div>
+        <a class="tc-btn" href="https://dreamstudio.ai" target="_blank">🚀 Try DreamStudio</a>
+      </div>
+    </div>
+
+    <!-- Canva AI -->
+    <div class="tool-card reveal" data-cat="edit generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#00b09b,#96c93d 60%,#00b09b);display:flex;align-items:center;justify-content:center;font-size:60px;">✏️</div>
+        <div class="tc-tag">✏️ Design</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Canva AI</div>
+        <div class="tc-tagline">Design + AI in One Platform</div>
+        <div class="tc-desc">Canva combines a drag-and-drop design editor with powerful AI tools — generate images, remove backgrounds, expand photos, and create professional designs in minutes.</div>
+        <div class="tc-features"><span class="tc-feat">Background Remove</span><span class="tc-feat">Magic Edit</span><span class="tc-feat">Templates</span></div>
+        <a class="tc-btn" href="https://www.canva.com/ai-image-generator/" target="_blank">🚀 Try Canva AI</a>
+      </div>
+    </div>
+
+    <!-- Bing Image Creator -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#002050,#0078d4,#00b4d8);display:flex;align-items:center;justify-content:center;font-size:60px;">🔷</div>
+        <div class="tc-tag">🔷 Microsoft</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Bing Image Creator</div>
+        <div class="tc-tagline">Free AI Images via Microsoft</div>
+        <div class="tc-desc">Bing Image Creator uses DALL·E technology and is completely free with a Microsoft account. Generate up to 100 images/day for free. Built into Copilot and Edge browser.</div>
+        <div class="tc-features"><span class="tc-feat">100% Free</span><span class="tc-feat">DALL·E Powered</span><span class="tc-feat">No Sign-up</span></div>
+        <a class="tc-btn" href="https://www.bing.com/images/create" target="_blank">🚀 Try Bing Creator</a>
+      </div>
+    </div>
+
+    <!-- Craiyon (DALL·E mini) -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#ff9a9e,#fad0c4,#ffecd2);display:flex;align-items:center;justify-content:center;font-size:60px;">🖍️</div>
+        <div class="tc-tag">🖍️ Classic</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.0</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Craiyon</div>
+        <div class="tc-tagline">The Original Free AI Art Generator</div>
+        <div class="tc-desc">Craiyon (formerly DALL·E mini) is the pioneer of free AI image generation. Generate 9 images per prompt instantly with no account required. Great for casual fun and exploration.</div>
+        <div class="tc-features"><span class="tc-feat">No Account</span><span class="tc-feat">9 Images/Prompt</span><span class="tc-feat">Instant</span></div>
+        <a class="tc-btn" href="https://www.craiyon.com" target="_blank">🚀 Try Craiyon</a>
+      </div>
+    </div>
+
+    <!-- Artbreeder -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#f093fb,#f5576c,#4facfe);display:flex;align-items:center;justify-content:center;font-size:60px;">🌸</div>
+        <div class="tc-tag">🌸 Blend</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Artbreeder</div>
+        <div class="tc-tagline">Blend & Evolve Images with AI</div>
+        <div class="tc-desc">Artbreeder lets you blend images together and evolve them using sliders. Create portraits, landscapes, and anime characters by mixing different artworks and adjusting genes.</div>
+        <div class="tc-features"><span class="tc-feat">Image Blending</span><span class="tc-feat">Portrait Gen</span><span class="tc-feat">Anime Style</span></div>
+        <a class="tc-btn" href="https://www.artbreeder.com" target="_blank">🚀 Try Artbreeder</a>
+      </div>
+    </div>
+
+    <!-- Getimg.ai -->
+    <div class="tool-card reveal" data-cat="generate edit free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0a0a0a,#1e3a5f,#00bfff);display:flex;align-items:center;justify-content:center;font-size:60px;">🌊</div>
+        <div class="tc-tag">🌊 Suite</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Getimg.ai</div>
+        <div class="tc-tagline">All-in-One AI Image Platform</div>
+        <div class="tc-desc">Getimg.ai is a comprehensive AI image platform with 60+ models. Generate, edit, expand, and create custom AI models. Includes inpainting, outpainting, and ControlNet tools.</div>
+        <div class="tc-features"><span class="tc-feat">60+ Models</span><span class="tc-feat">Inpainting</span><span class="tc-feat">Outpainting</span><span class="tc-feat">ControlNet</span></div>
+        <a class="tc-btn" href="https://getimg.ai" target="_blank">🚀 Try Getimg.ai</a>
+      </div>
+    </div>
+
+    <!-- Tensor.art -->
+    <div class="tool-card reveal" data-cat="generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0d0d0d,#ff6b6b,#feca57);display:flex;align-items:center;justify-content:center;font-size:60px;">🎭</div>
+        <div class="tc-tag">🎭 Tensor</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Tensor.art</div>
+        <div class="tc-tagline">Free AI Art with 1000s of Models</div>
+        <div class="tc-desc">Tensor.art hosts thousands of community Stable Diffusion models for free. Generate anime, realistic, fantasy, and more styles with no limit on the number of images.</div>
+        <div class="tc-features"><span class="tc-feat">1000s of Models</span><span class="tc-feat">Anime Style</span><span class="tc-feat">Unlimited Free</span></div>
+        <a class="tc-btn" href="https://tensor.art" target="_blank">🚀 Try Tensor.art</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: EDIT & ENHANCE -->
+  <div class="section-title" style="margin-top:60px;">✏️ AI Photo Editing & Enhancement</div>
+  <div class="tools-grid">
+
     <!-- Remove.bg -->
     <div class="tool-card reveal" data-cat="edit free">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#134e5e,#71b280 60%,#134e5e);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">✂️</div>
-        <div class="tc-tag">✂️ Background</div>
-        <div class="tc-free">Free</div>
-        <div class="tc-rating">⭐ 4.8</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#134e5e,#71b280 60%,#134e5e);display:flex;align-items:center;justify-content:center;font-size:60px;">✂️</div>
+        <div class="tc-tag">✂️ Background</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.8</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Remove.bg</div>
         <div class="tc-tagline">Remove Backgrounds in Seconds</div>
         <div class="tc-desc">The world's fastest and most accurate background removal tool. Upload any photo and get a clean, transparent background instantly — no manual selection required.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Instant Results</span>
-          <span class="tc-feat">High Accuracy</span>
-          <span class="tc-feat">API Access</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Instant Results</span><span class="tc-feat">High Accuracy</span><span class="tc-feat">API Access</span></div>
         <a class="tc-btn" href="https://remove.bg" target="_blank">🚀 Try Remove.bg</a>
       </div>
     </div>
@@ -541,28 +622,245 @@ footer{
     <!-- Clipdrop -->
     <div class="tool-card reveal" data-cat="edit free">
       <div class="tc-img">
-        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1f1c2c,#928dab 60%,#1f1c2c);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🧹</div>
-        <div class="tc-tag">🧹 Edit AI</div>
-        <div class="tc-free">Free Plan</div>
-        <div class="tc-rating">⭐ 4.5</div>
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1f1c2c,#928dab 60%,#1f1c2c);display:flex;align-items:center;justify-content:center;font-size:60px;">🧹</div>
+        <div class="tc-tag">🧹 Edit AI</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.5</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Clipdrop</div>
         <div class="tc-tagline">All-in-One AI Photo Editing</div>
         <div class="tc-desc">Clipdrop by Stability AI offers a full suite of AI editing tools — remove objects, upscale images, reimagine photos, swap backgrounds, and enhance quality with one click.</div>
-        <div class="tc-features">
-          <span class="tc-feat">Object Removal</span>
-          <span class="tc-feat">Upscaling</span>
-          <span class="tc-feat">Sky Replacement</span>
-        </div>
+        <div class="tc-features"><span class="tc-feat">Object Removal</span><span class="tc-feat">Upscaling</span><span class="tc-feat">Sky Replacement</span></div>
         <a class="tc-btn" href="https://clipdrop.co" target="_blank">🚀 Try Clipdrop</a>
       </div>
     </div>
 
+    <!-- Fotor AI -->
+    <div class="tool-card reveal" data-cat="edit free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#f7971e,#ffd200,#f7971e);display:flex;align-items:center;justify-content:center;font-size:60px;">📷</div>
+        <div class="tc-tag">📷 Photo Edit</div><div class="tc-free">Free Plan</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Fotor AI</div>
+        <div class="tc-tagline">Smart Photo Editor with AI</div>
+        <div class="tc-desc">Fotor is an online photo editor powered by AI. Enhance colors, fix lighting, remove blemishes, swap backgrounds, and apply artistic filters with a simple click.</div>
+        <div class="tc-features"><span class="tc-feat">Auto Enhance</span><span class="tc-feat">Filters</span><span class="tc-feat">Collage Maker</span></div>
+        <a class="tc-btn" href="https://www.fotor.com" target="_blank">🚀 Try Fotor</a>
+      </div>
+    </div>
+
+    <!-- Luminar AI -->
+    <div class="tool-card reveal" data-cat="edit paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#e94560);display:flex;align-items:center;justify-content:center;font-size:60px;">🌅</div>
+        <div class="tc-tag">🌅 Photo Pro</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Luminar Neo</div>
+        <div class="tc-tagline">AI Photo Editing for Photographers</div>
+        <div class="tc-desc">Luminar Neo uses AI to automate complex editing tasks — sky replacement, subject isolation, light enhancement, and portrait retouching — all with a single slider.</div>
+        <div class="tc-features"><span class="tc-feat">Sky Replacement</span><span class="tc-feat">Portrait AI</span><span class="tc-feat">One-Click Edit</span></div>
+        <a class="tc-btn" href="https://skylum.com/luminar" target="_blank">🚀 Try Luminar</a>
+      </div>
+    </div>
+
+    <!-- Photoleap -->
+    <div class="tool-card reveal" data-cat="edit generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#11998e,#38ef7d);display:flex;align-items:center;justify-content:center;font-size:60px;">🌿</div>
+        <div class="tc-tag">🌿 Mobile AI</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Photoleap</div>
+        <div class="tc-tagline">AI Photo Editor for Mobile</div>
+        <div class="tc-desc">Photoleap is a powerful AI-driven photo editing app available on iOS and Android. Generate images from text, apply artistic styles, and edit photos with professional-grade tools.</div>
+        <div class="tc-features"><span class="tc-feat">Mobile App</span><span class="tc-feat">Text-to-Image</span><span class="tc-feat">Style Transfer</span></div>
+        <a class="tc-btn" href="https://www.photoleapapp.com" target="_blank">🚀 Try Photoleap</a>
+      </div>
+    </div>
+
+    <!-- Let's Enhance -->
+    <div class="tool-card reveal" data-cat="edit upscale paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#4e54c8,#8f94fb);display:flex;align-items:center;justify-content:center;font-size:60px;">🔬</div>
+        <div class="tc-tag">🔬 Enhance</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Let's Enhance</div>
+        <div class="tc-tagline">AI Image Upscaler & Enhancer</div>
+        <div class="tc-desc">Let's Enhance uses AI to upscale low-resolution images up to 16x while adding fine details. Restore old photos, enhance real estate images, and improve product photos instantly.</div>
+        <div class="tc-features"><span class="tc-feat">16x Upscale</span><span class="tc-feat">Detail Restore</span><span class="tc-feat">Batch Process</span></div>
+        <a class="tc-btn" href="https://letsenhance.io" target="_blank">🚀 Try Let's Enhance</a>
+      </div>
+    </div>
+
   </div>
+
+  <!-- SECTION 3: UPSCALE & RESTORE -->
+  <div class="section-title" style="margin-top:60px;">🔍 AI Upscalers & Photo Restorers</div>
+  <div class="tools-grid">
+
+    <!-- Topaz Gigapixel -->
+    <div class="tool-card reveal" data-cat="upscale paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1e3c72,#2a5298,#4fc3f7);display:flex;align-items:center;justify-content:center;font-size:60px;">🔭</div>
+        <div class="tc-tag">🔭 Topaz</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Topaz Gigapixel AI</div>
+        <div class="tc-tagline">Industry-Leading AI Upscaler</div>
+        <div class="tc-desc">Topaz Gigapixel AI is the gold standard for AI upscaling. Enlarge images up to 600% while preserving and enhancing fine details. Used by photographers and studios worldwide.</div>
+        <div class="tc-features"><span class="tc-feat">600% Upscale</span><span class="tc-feat">Noise Reduction</span><span class="tc-feat">Face Recovery</span></div>
+        <a class="tc-btn" href="https://www.topazlabs.com/gigapixel-ai" target="_blank">🚀 Try Gigapixel</a>
+      </div>
+    </div>
+
+    <!-- Upscayl -->
+    <div class="tool-card reveal" data-cat="upscale free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f0c29,#302b63,#00d2ff);display:flex;align-items:center;justify-content:center;font-size:60px;">⬆️</div>
+        <div class="tc-tag">⬆️ Open Source</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Upscayl</div>
+        <div class="tc-tagline">Free & Open-Source AI Upscaler</div>
+        <div class="tc-desc">Upscayl is a free, open-source AI image upscaler that runs locally on your computer. No internet needed, no watermarks, completely private. Supports Windows, Mac, and Linux.</div>
+        <div class="tc-features"><span class="tc-feat">100% Free</span><span class="tc-feat">Offline</span><span class="tc-feat">Private</span><span class="tc-feat">Cross-Platform</span></div>
+        <a class="tc-btn" href="https://upscayl.org" target="_blank">🚀 Download Upscayl</a>
+      </div>
+    </div>
+
+    <!-- Remini -->
+    <div class="tool-card reveal" data-cat="upscale edit free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#f953c6,#b91d73);display:flex;align-items:center;justify-content:center;font-size:60px;">✨</div>
+        <div class="tc-tag">✨ Restore</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Remini</div>
+        <div class="tc-tagline">AI Photo Enhancer & Restorer</div>
+        <div class="tc-desc">Remini transforms blurry, low-quality, and old photos into sharp, high-definition images. Perfect for restoring old family photos and enhancing portrait quality.</div>
+        <div class="tc-features"><span class="tc-feat">Photo Restore</span><span class="tc-feat">Face Enhancement</span><span class="tc-feat">Mobile App</span></div>
+        <a class="tc-btn" href="https://remini.ai" target="_blank">🚀 Try Remini</a>
+      </div>
+    </div>
+
+    <!-- Deep Image AI -->
+    <div class="tool-card reveal" data-cat="upscale paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#141e30,#243b55,#00c6ff);display:flex;align-items:center;justify-content:center;font-size:60px;">🌐</div>
+        <div class="tc-tag">🌐 Upscale</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Deep Image AI</div>
+        <div class="tc-tagline">Bulk AI Image Upscaler</div>
+        <div class="tc-desc">Deep Image AI specializes in bulk upscaling and enhancement. Ideal for e-commerce stores, photographers, and designers who need to process many images at once via API or web.</div>
+        <div class="tc-features"><span class="tc-feat">Bulk Processing</span><span class="tc-feat">API</span><span class="tc-feat">E-commerce Focus</span></div>
+        <a class="tc-btn" href="https://deep-image.ai" target="_blank">🚀 Try Deep Image</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: AVATAR & FACE AI -->
+  <div class="section-title" style="margin-top:60px;">🧑 AI Avatar & Face Generators</div>
+  <div class="tools-grid">
+
+    <!-- Lensa AI -->
+    <div class="tool-card reveal" data-cat="avatar paid">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#fc4a1a,#f7b733);display:flex;align-items:center;justify-content:center;font-size:60px;">🪄</div>
+        <div class="tc-tag">🪄 Avatar</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Lensa AI</div>
+        <div class="tc-tagline">AI Magic Avatars from Your Selfies</div>
+        <div class="tc-desc">Lensa AI became viral for its Magic Avatars feature — upload 10-20 selfies and get 100+ stunning AI portraits in different artistic styles from fantasy to sci-fi.</div>
+        <div class="tc-features"><span class="tc-feat">Magic Avatars</span><span class="tc-feat">50+ Styles</span><span class="tc-feat">Mobile App</span></div>
+        <a class="tc-btn" href="https://lensa-ai.com" target="_blank">🚀 Try Lensa</a>
+      </div>
+    </div>
+
+    <!-- Fotor AI Avatar -->
+    <div class="tool-card reveal" data-cat="avatar free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#7f00ff,#e100ff);display:flex;align-items:center;justify-content:center;font-size:60px;">🧬</div>
+        <div class="tc-tag">🧬 AI Avatar</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">PFPMaker</div>
+        <div class="tc-tagline">AI Profile Picture Generator</div>
+        <div class="tc-desc">PFPMaker creates professional and stylized profile pictures using AI. Upload a photo and get beautiful profile pictures perfect for LinkedIn, Twitter, and social media profiles.</div>
+        <div class="tc-features"><span class="tc-feat">Profile Pics</span><span class="tc-feat">Background Remove</span><span class="tc-feat">100+ Styles</span></div>
+        <a class="tc-btn" href="https://pfpmaker.com" target="_blank">🚀 Try PFPMaker</a>
+      </div>
+    </div>
+
+    <!-- This Person Does Not Exist -->
+    <div class="tool-card reveal" data-cat="avatar generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#232526,#414345);display:flex;align-items:center;justify-content:center;font-size:60px;">👤</div>
+        <div class="tc-tag">👤 Face Gen</div><div class="tc-free">Free</div><div class="tc-rating">⭐ 4.5</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Generated Photos</div>
+        <div class="tc-tagline">100% AI-Generated Human Faces</div>
+        <div class="tc-desc">Generated Photos creates photorealistic faces of people who don't exist, powered by GANs. Perfect for placeholder images, mockups, UI design, and projects needing diverse stock photos.</div>
+        <div class="tc-features"><span class="tc-feat">Royalty Free</span><span class="tc-feat">Diverse Faces</span><span class="tc-feat">Commercial Use</span></div>
+        <a class="tc-btn" href="https://generated.photos" target="_blank">🚀 Try Generated Photos</a>
+      </div>
+    </div>
+
+    <!-- HeyPhoto -->
+    <div class="tool-card reveal" data-cat="avatar edit free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#ee0979,#ff6a00);display:flex;align-items:center;justify-content:center;font-size:60px;">🎪</div>
+        <div class="tc-tag">🎪 Face Swap</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.3</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Reface AI</div>
+        <div class="tc-tagline">Face Swap & AI Avatars</div>
+        <div class="tc-desc">Reface lets you swap your face into photos, GIFs, and videos using AI. Create fun face swaps for memes, movies, and music videos, or generate stylized avatar versions of yourself.</div>
+        <div class="tc-features"><span class="tc-feat">Face Swap</span><span class="tc-feat">GIF Support</span><span class="tc-feat">Video Swap</span></div>
+        <a class="tc-btn" href="https://hey.reface.ai" target="_blank">🚀 Try Reface</a>
+      </div>
+    </div>
+
+    <!-- Picso -->
+    <div class="tool-card reveal" data-cat="avatar generate free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#1a1a2e,#e94560,#0f3460);display:flex;align-items:center;justify-content:center;font-size:60px;">🎌</div>
+        <div class="tc-tag">🎌 Anime</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.4</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Waifu Labs</div>
+        <div class="tc-tagline">AI Anime Character Generator</div>
+        <div class="tc-desc">Waifu Labs uses AI to generate custom anime characters in seconds. Pick your preferred style, hair, eyes, and personality to create a unique anime avatar or character art.</div>
+        <div class="tc-features"><span class="tc-feat">Anime Style</span><span class="tc-feat">Custom Traits</span><span class="tc-feat">Instant</span></div>
+        <a class="tc-btn" href="https://waifulabs.com" target="_blank">🚀 Try Waifu Labs</a>
+      </div>
+    </div>
+
+    <!-- Aitana (Photoroom) -->
+    <div class="tool-card reveal" data-cat="edit free">
+      <div class="tc-img">
+        <div class="tc-img-bg" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);display:flex;align-items:center;justify-content:center;font-size:60px;">📸</div>
+        <div class="tc-tag">📸 Product</div><div class="tc-freemium">Freemium</div><div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Photoroom</div>
+        <div class="tc-tagline">AI Photo Studio for Products</div>
+        <div class="tc-desc">Photoroom is the go-to AI tool for creating professional product photos. Remove backgrounds, create studio-quality shots, and batch process hundreds of product images for your store.</div>
+        <div class="tc-features"><span class="tc-feat">Product Photos</span><span class="tc-feat">Batch Edit</span><span class="tc-feat">Studio Scenes</span></div>
+        <a class="tc-btn" href="https://www.photoroom.com" target="_blank">🚀 Try Photoroom</a>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
-<!-- ─── FOOTER ─── -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">EVERY AI</div>
   <p>© 2026 Every AI · Gateway to all AI tools</p>
@@ -571,81 +869,40 @@ footer{
 </div>
 
 <script>
-/* ── NEURAL CANVAS ── */
+/* NEURAL CANVAS */
 const canvas=document.getElementById('neuralCanvas');
 const ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-
 const nodes=[];
 for(let i=0;i<55;i++){
-  nodes.push({
-    x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
-    vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,
-    r:Math.random()*2.5+1,pulse:Math.random()*Math.PI*2
-  });
+  nodes.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,r:Math.random()*2.5+1,pulse:Math.random()*Math.PI*2});
 }
 function drawNeural(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const t=Date.now()*0.001;
-  nodes.forEach(n=>{
-    n.x+=n.vx;n.y+=n.vy;
-    if(n.x<0||n.x>canvas.width)n.vx*=-1;
-    if(n.y<0||n.y>canvas.height)n.vy*=-1;
-    n.pulse+=0.03;
-  });
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<150){
-        const alpha=(1-dist/150)*0.2;
-        ctx.strokeStyle=`hsla(${320+Math.sin(t*0.3)*20},70%,65%,${alpha})`;
-        ctx.lineWidth=0.8;ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
-      }
-    }
-  }
-  nodes.forEach(n=>{
-    const glow=(Math.sin(n.pulse)+1)/2;
-    const hue=300+Math.sin(t+n.pulse)*40;
-    ctx.shadowColor=`hsl(${hue},80%,65%)`;ctx.shadowBlur=8*glow;
-    ctx.fillStyle=`hsla(${hue},70%,70%,${0.4+glow*0.5})`;
-    ctx.beginPath();ctx.arc(n.x,n.y,n.r*(0.8+glow*0.4),0,Math.PI*2);ctx.fill();
-  });
+  nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>canvas.width)n.vx*=-1;if(n.y<0||n.y>canvas.height)n.vy*=-1;n.pulse+=0.03;});
+  for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;const dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){const alpha=(1-dist/150)*0.2;ctx.strokeStyle=`hsla(${320+Math.sin(t*0.3)*20},70%,65%,${alpha})`;ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();}}}
+  nodes.forEach(n=>{const glow=(Math.sin(n.pulse)+1)/2;const hue=300+Math.sin(t+n.pulse)*40;ctx.shadowColor=`hsl(${hue},80%,65%)`;ctx.shadowBlur=8*glow;ctx.fillStyle=`hsla(${hue},70%,70%,${0.4+glow*0.5})`;ctx.beginPath();ctx.arc(n.x,n.y,n.r*(0.8+glow*0.4),0,Math.PI*2);ctx.fill();});
   ctx.shadowBlur=0;requestAnimationFrame(drawNeural);
 }
 drawNeural();
 
-/* ── PARTICLES ── */
-for(let i=0;i<70;i++){
-  const p=document.createElement('div');p.className='particle';
-  p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*0.3};`;
-  document.querySelector('.bg-scene').appendChild(p);
-}
+/* PARTICLES */
+for(let i=0;i<70;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*0.3};`;document.querySelector('.bg-scene').appendChild(p);}
 
-/* ── SCROLL REVEAL ── */
+/* SCROLL REVEAL */
 const revealEls=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*80);
-    }
-  });
-},{threshold:0.08});
+const observer=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);}});},{threshold:0.08});
 revealEls.forEach(el=>observer.observe(el));
 
-/* ── FILTER ── */
-function filterCards(cat, btn){
+/* FILTER */
+function filterCards(cat,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.tool-card').forEach(card=>{
-    if(cat==='all'){
-      card.style.display='flex';
-    } else {
-      const cats=card.dataset.cat||'';
-      card.style.display=cats.includes(cat)?'flex':'none';
-    }
+    if(cat==='all'){card.style.display='flex';}
+    else{const cats=card.dataset.cat||'';card.style.display=cats.includes(cat)?'flex':'none';}
   });
 }
 </script>
