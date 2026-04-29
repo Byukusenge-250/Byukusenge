@@ -1,10 +1,535 @@
-    <!-- Amper Music -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVERY AI — Gateway to All AI Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#04060d;
+  --surface:#080c18;
+  --surface2:#0d1325;
+  --border:#1a2140;
+  --border-bright:#2a3560;
+  --accent:#00ffa3;
+  --accent2:#7c6aff;
+  --accent3:#ff6b6b;
+  --accent4:#ffc93c;
+  --text:#e8ecff;
+  --text-dim:#8896c0;
+  --text-muted:#3d4f7a;
+  --glow:0 0 30px rgba(0,255,163,0.15);
+  --card-glow:0 8px 40px rgba(0,0,0,0.6);
+  --font-head:'Syne',sans-serif;
+  --font-body:'DM Mono',monospace;
+  --font-display:'Playfair Display',serif;
+  --radius:16px;
+  --radius-sm:10px;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:14px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── CANVAS ─── */
+#neuralCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:0.6;
+}
+
+/* ─── BG SCENE ─── */
+.bg-scene{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.bg-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;
+  animation:orbDrift 20s ease-in-out infinite alternate;
+}
+.bg-orb:nth-child(1){width:600px;height:600px;background:radial-gradient(circle,#00ffa3,transparent);top:-100px;left:-100px;animation-duration:22s;}
+.bg-orb:nth-child(2){width:500px;height:500px;background:radial-gradient(circle,#7c6aff,transparent);bottom:-100px;right:-50px;animation-duration:18s;animation-delay:-8s;}
+.bg-orb:nth-child(3){width:400px;height:400px;background:radial-gradient(circle,#ff6b6b,transparent);top:40%;left:50%;animation-duration:25s;animation-delay:-5s;}
+@keyframes orbDrift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(40px,30px) scale(1.1);}}
+
+.particle{
+  position:absolute;width:2px;height:2px;
+  background:var(--accent);
+  border-radius:50%;
+  animation:particleFloat linear infinite;
+  pointer-events:none;
+}
+@keyframes particleFloat{
+  0%{transform:translateY(0) scale(1);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.5;}
+  100%{transform:translateY(-100vh) scale(0);opacity:0;}
+}
+
+/* ─── WRAPPER ─── */
+.wrapper{position:relative;z-index:1;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(4,6,13,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--font-head);
+  font-weight:800;font-size:22px;
+  letter-spacing:-0.5px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-tagline{
+  font-size:11px;color:var(--text-muted);
+  letter-spacing:3px;text-transform:uppercase;
+}
+.nav-badge{
+  background:linear-gradient(135deg,var(--accent),#00cc82);
+  color:#000;font-size:10px;font-weight:700;
+  padding:4px 12px;border-radius:20px;
+  letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;
+  position:relative;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,255,163,0.08);
+  border:1px solid rgba(0,255,163,0.2);
+  border-radius:30px;padding:6px 18px;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:32px;
+  animation:fadeDown 0.8s ease both;
+}
+.hero-eyebrow .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px var(--accent);
+  animation:pulse 2s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+.hero-title{
+  font-family:var(--font-head);
+  font-size:clamp(56px,10vw,120px);
+  font-weight:800;
+  line-height:0.9;
+  letter-spacing:-4px;
+  margin-bottom:24px;
+  animation:fadeDown 0.8s 0.15s ease both;
+}
+.hero-title .line1{
+  background:linear-gradient(135deg,#ffffff 0%,#c8d0ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+.hero-title .line2{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+  font-style:italic;
+  font-family:var(--font-display);
+}
+
+.hero-sub{
+  font-size:15px;color:var(--text-dim);
+  max-width:460px;line-height:1.8;
+  margin-bottom:48px;
+  animation:fadeDown 0.8s 0.3s ease both;
+}
+
+/* EQ Bars */
+.hero-eq{
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:4px;height:60px;margin-bottom:40px;
+  animation:fadeDown 0.8s 0.45s ease both;
+}
+.eq-bar{
+  width:4px;border-radius:2px;
+  background:linear-gradient(to top,var(--accent),var(--accent2));
+  animation:eqAnim ease-in-out infinite alternate;
+  box-shadow:0 0 6px rgba(0,255,163,0.3);
+}
+@keyframes eqAnim{0%{height:4px;opacity:0.4;}100%{height:var(--h,20px);opacity:1;}}
+
+.hero-stats{
+  display:flex;gap:48px;
+  animation:fadeDown 0.8s 0.5s ease both;
+}
+.stat{text-align:center;}
+.stat-num{
+  font-family:var(--font-head);font-size:32px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+.stat-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);}
+
+/* SOUNDWAVE */
+.soundwave-section{
+  padding:40px 0;
+  overflow:hidden;position:relative;
+}
+.soundwave-section::before,.soundwave-section::after{
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;
+}
+.soundwave-section::before{left:0;background:linear-gradient(to right,var(--bg),transparent);}
+.soundwave-section::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
+#soundwave{
+  display:flex;align-items:center;justify-content:center;
+  gap:3px;height:80px;
+}
+.sw-bar{
+  width:3px;min-width:3px;border-radius:2px;
+  background:linear-gradient(to top,rgba(0,255,163,0.8),rgba(124,106,255,0.6));
+  animation:swAnim ease-in-out infinite alternate;
+  flex-shrink:0;
+}
+@keyframes swAnim{0%{height:4px;opacity:0.2;}100%{height:var(--h,20px);opacity:0.8;}}
+
+/* ─── FILTERS ─── */
+.filter-section{
+  padding:32px 48px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(8,12,24,0.6);
+  backdrop-filter:blur(10px);
+  position:sticky;top:69px;z-index:90;
+}
+.filter-label{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-muted);margin-right:8px;
+}
+.filter-btn{
+  padding:7px 18px;border-radius:30px;
+  border:1px solid var(--border-bright);
+  background:transparent;color:var(--text-dim);
+  font-family:var(--font-body);font-size:11px;
+  cursor:pointer;transition:all 0.2s ease;
+  letter-spacing:1px;
+}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+.filter-btn.active{
+  background:var(--accent);border-color:var(--accent);
+  color:#000;font-weight:700;
+  box-shadow:0 0 20px rgba(0,255,163,0.3);
+}
+
+/* ─── GRID ─── */
+.grid-section{padding:60px 48px 80px;}
+.section-header{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:40px;
+}
+.section-title{
+  font-family:var(--font-head);font-size:13px;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--text-muted);
+}
+.section-count{
+  font-family:var(--font-display);font-style:italic;
+  font-size:48px;color:var(--accent);opacity:0.3;
+  line-height:1;
+}
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:24px;
+}
+
+/* ─── TOOL CARD ─── */
+.tool-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  cursor:pointer;
+  position:relative;
+}
+.tool-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,255,163,0.03),transparent);
+  opacity:0;transition:opacity 0.3s ease;
+  pointer-events:none;border-radius:var(--radius);
+}
+.tool-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--border-bright);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 30px rgba(0,255,163,0.08);
+}
+.tool-card:hover::before{opacity:1;}
+
+/* Card image area */
+.tc-img{
+  position:relative;height:140px;overflow:hidden;
+  flex-shrink:0;
+}
+.tc-gradient{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  transition:transform 0.4s ease;
+}
+.tool-card:hover .tc-gradient{transform:scale(1.04);}
+.tc-grad-emoji{
+  font-size:52px;filter:drop-shadow(0 0 20px rgba(255,255,255,0.3));
+  animation:floatEmoji 4s ease-in-out infinite;
+}
+@keyframes floatEmoji{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* badges */
+.tc-tag,.tc-paid,.tc-free,.tc-open,.tc-rating{
+  position:absolute;
+  font-size:10px;font-weight:600;
+  border-radius:20px;padding:3px 10px;
+  backdrop-filter:blur(10px);
+  letter-spacing:0.5px;
+}
+.tc-tag{
+  top:10px;left:10px;
+  background:rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.85);
+}
+.tc-paid{
+  top:10px;right:10px;
+  background:rgba(255,107,107,0.15);
+  border:1px solid rgba(255,107,107,0.4);
+  color:#ff9090;
+}
+.tc-free{
+  top:10px;right:10px;
+  background:rgba(0,255,163,0.12);
+  border:1px solid rgba(0,255,163,0.35);
+  color:var(--accent);
+}
+.tc-open{
+  top:10px;right:10px;
+  background:rgba(124,106,255,0.15);
+  border:1px solid rgba(124,106,255,0.4);
+  color:#a89aff;
+}
+.tc-rating{
+  bottom:10px;right:10px;
+  background:rgba(255,201,60,0.1);
+  border:1px solid rgba(255,201,60,0.3);
+  color:var(--accent4);
+  font-size:11px;
+}
+
+/* card body */
+.tc-body{
+  padding:20px;display:flex;flex-direction:column;gap:10px;flex:1;
+}
+.tc-name{
+  font-family:var(--font-head);font-size:17px;font-weight:700;
+  color:var(--text);letter-spacing:-0.3px;
+}
+.tc-tagline{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent2);opacity:0.8;
+}
+.tc-desc{
+  font-size:12.5px;color:var(--text-dim);line-height:1.7;flex:1;
+}
+.tc-features{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.tc-feat{
+  font-size:10px;padding:3px 10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border-bright);
+  border-radius:20px;color:var(--text-dim);
+  letter-spacing:0.5px;
+}
+.tc-btn{
+  display:block;text-align:center;
+  padding:11px 20px;
+  border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,rgba(0,255,163,0.12),rgba(124,106,255,0.08));
+  border:1px solid rgba(0,255,163,0.25);
+  color:var(--accent);
+  text-decoration:none;
+  font-family:var(--font-body);font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:all 0.2s ease;
+  margin-top:auto;
+}
+.tc-btn:hover{
+  background:var(--accent);color:#000;
+  box-shadow:0 0 25px rgba(0,255,163,0.4);
+  border-color:var(--accent);
+}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.34,1.2,0.64,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:60px 48px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  background:var(--surface);
+}
+.footer-logo{
+  font-family:var(--font-head);font-size:28px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:12px;
+}
+footer p{font-size:12px;color:var(--text-muted);}
+
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .hero{padding:100px 20px 60px;}
+  .hero-stats{gap:24px;}
+  .filter-section{padding:20px;}
+  .grid-section{padding:40px 20px 60px;}
+  .tools-grid{grid-template-columns:1fr;}
+  .section-header{flex-direction:column;gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="neuralCanvas"></canvas>
+<div class="bg-scene">
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+</div>
+
+<div class="wrapper">
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-logo">EVERY AI</div>
+    <div class="nav-tagline">Gateway to all AI tools</div>
+  </div>
+  <div class="nav-badge">✦ 20+ Tools</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="dot"></span>Curated Collection 2026</div>
+  <h1 class="hero-title">
+    <span class="line1">Every</span>
+    <span class="line2">AI Tool</span>
+  </h1>
+  <p class="hero-sub">The definitive directory of AI-powered tools for music, creativity, writing, code, and beyond.</p>
+  <div class="hero-eq" id="heroEq"></div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">20+</span><span class="stat-label">AI Tools</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Categories</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Possibilities</span></div>
+  </div>
+</section>
+
+<!-- SOUNDWAVE -->
+<div class="soundwave-section">
+  <div id="soundwave"></div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-section">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
+  <button class="filter-btn" onclick="filterCards('music',this)">🎵 Music</button>
+  <button class="filter-btn" onclick="filterCards('write',this)">✍️ Writing</button>
+  <button class="filter-btn" onclick="filterCards('image',this)">🎨 Image</button>
+  <button class="filter-btn" onclick="filterCards('video',this)">🎬 Video</button>
+  <button class="filter-btn" onclick="filterCards('code',this)">💻 Code</button>
+  <button class="filter-btn" onclick="filterCards('chat',this)">🤖 Chat</button>
+  <button class="filter-btn" onclick="filterCards('free',this)">✅ Free</button>
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div class="section-header">
+    <div class="section-title">// AI Tool Directory</div>
+    <div class="section-count">20</div>
+  </div>
+  <div class="tools-grid">
+
+    <!-- 1 Suno -->
+    <div class="tool-card reveal" data-cat="music beats free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0d0221,#3b0764,#7e22ce,#c084fc);">
+          <span class="tc-grad-emoji">🎵</span>
+        </div>
+        <div class="tc-tag">🎵 Music Gen</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Suno AI</div>
+        <div class="tc-tagline">Full Song Generation</div>
+        <div class="tc-desc">Suno transforms text prompts into complete, radio-ready songs with vocals, melody, and instruments. Describe a style, mood, or lyrics — Suno handles the rest in seconds.</div>
+        <div class="tc-features"><span class="tc-feat">Lyrics + Vocals</span><span class="tc-feat">Any Genre</span><span class="tc-feat">Commercial Use</span></div>
+        <a class="tc-btn" href="https://suno.ai" target="_blank">🚀 Try Suno AI</a>
+      </div>
+    </div>
+
+    <!-- 2 Udio -->
+    <div class="tool-card reveal" data-cat="music beats">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#001f3f,#003d7a,#0077b6,#90e0ef);">
+          <span class="tc-grad-emoji">🌊</span>
+        </div>
+        <div class="tc-tag">🌊 Music Gen</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Udio</div>
+        <div class="tc-tagline">Studio-Quality AI Music</div>
+        <div class="tc-desc">Udio generates studio-quality music from text descriptions. Known for its remarkably realistic output, Udio excels at complex arrangements and detailed genre blending unlike any other tool.</div>
+        <div class="tc-features"><span class="tc-feat">Studio Quality</span><span class="tc-feat">Genre Blend</span><span class="tc-feat">Extend Tracks</span></div>
+        <a class="tc-btn" href="https://udio.com" target="_blank">🚀 Try Udio</a>
+      </div>
+    </div>
+
+    <!-- 3 Soundful -->
     <div class="tool-card reveal" data-cat="music beats">
       <div class="tc-img">
         <div class="tc-gradient" style="background:linear-gradient(135deg,#1a0a2e,#4c1d95,#7c3aed,#a78bfa);">
           <span class="tc-grad-emoji">🪐</span>
         </div>
-        <div class="tc-tag">🪐 Scoring</div><div class="tc-paid">Premium</div><div class="tc-rating">⭐ 4.4</div>
+        <div class="tc-tag">🪐 Scoring</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.4</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Soundful</div>
@@ -15,25 +540,330 @@
       </div>
     </div>
 
-    <!-- Ecrett Music -->
+    <!-- 4 Ecrett Music -->
     <div class="tool-card reveal" data-cat="music beats free">
       <div class="tc-img">
         <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0a0a,#065f46,#10b981,#6ee7b7);">
           <span class="tc-grad-emoji">🌿</span>
         </div>
-        <div class="tc-tag">🌿 Scene Music</div><div class="tc-free">Free Trial</div><div class="tc-rating">⭐ 4.4</div>
+        <div class="tc-tag">🌿 Scene Music</div>
+        <div class="tc-free">Free Trial</div>
+        <div class="tc-rating">⭐ 4.4</div>
       </div>
       <div class="tc-body">
         <div class="tc-name">Ecrett Music</div>
         <div class="tc-tagline">AI Music for Video Scenes</div>
-        <div class="tc-desc">Ecrett Music creates music specifically designed to match video scenes. Select the scene type (party, travel, romance, action), emotion, and genre, and get a perfect matching track instantly.</div>
+        <div class="tc-desc">Ecrett Music creates music specifically designed to match video scenes. Select the scene type, emotion, and genre, and get a perfectly matched track instantly — ideal for filmmakers and content creators.</div>
         <div class="tc-features"><span class="tc-feat">Scene-Based</span><span class="tc-feat">Video Sync</span><span class="tc-feat">Unlimited Gen</span></div>
         <a class="tc-btn" href="https://ecrettmusic.com" target="_blank">🚀 Try Ecrett Music</a>
       </div>
     </div>
 
-  </div>
+    <!-- 5 Boomy -->
+    <div class="tool-card reveal" data-cat="music beats free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1a0000,#7f1d1d,#dc2626,#fca5a5);">
+          <span class="tc-grad-emoji">🥁</span>
+        </div>
+        <div class="tc-tag">🥁 Beats</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.3</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Boomy</div>
+        <div class="tc-tagline">Create & Release Music Instantly</div>
+        <div class="tc-desc">Boomy lets anyone create original songs in seconds and release them to streaming platforms. With millions of songs created, it's the most accessible AI music tool for non-musicians wanting to publish.</div>
+        <div class="tc-features"><span class="tc-feat">Stream Release</span><span class="tc-feat">Royalty Split</span><span class="tc-feat">No Skills Needed</span></div>
+        <a class="tc-btn" href="https://boomy.com" target="_blank">🚀 Try Boomy</a>
+      </div>
+    </div>
 
+    <!-- 6 AIVA -->
+    <div class="tool-card reveal" data-cat="music beats">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0c0a00,#451a03,#b45309,#fcd34d);">
+          <span class="tc-grad-emoji">🎻</span>
+        </div>
+        <div class="tc-tag">🎻 Orchestral</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">AIVA</div>
+        <div class="tc-tagline">Emotional Soundtrack Composer</div>
+        <div class="tc-desc">AIVA (Artificial Intelligence Virtual Artist) is a recognized composer of emotional, cinematic soundtracks. Officially registered with SACEM, it's ideal for game soundtracks, films, and orchestral pieces.</div>
+        <div class="tc-features"><span class="tc-feat">Cinematic</span><span class="tc-feat">SACEM Certified</span><span class="tc-feat">MIDI Export</span></div>
+        <a class="tc-btn" href="https://aiva.ai" target="_blank">🚀 Try AIVA</a>
+      </div>
+    </div>
+
+    <!-- 7 Midjourney -->
+    <div class="tool-card reveal" data-cat="image design">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e,#8b5cf6);">
+          <span class="tc-grad-emoji">🎨</span>
+        </div>
+        <div class="tc-tag">🎨 Image Gen</div>
+        <div class="tc-paid">Paid</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Midjourney</div>
+        <div class="tc-tagline">World's Best AI Image Generator</div>
+        <div class="tc-desc">Midjourney produces breathtaking, artistic images from text prompts. Renowned for its unique aesthetic, photorealism, and painterly style, it remains the gold standard for AI-generated visuals.</div>
+        <div class="tc-features"><span class="tc-feat">Photorealism</span><span class="tc-feat">Artistic Styles</span><span class="tc-feat">V7 Model</span></div>
+        <a class="tc-btn" href="https://midjourney.com" target="_blank">🚀 Try Midjourney</a>
+      </div>
+    </div>
+
+    <!-- 8 DALL·E 3 -->
+    <div class="tool-card reveal" data-cat="image design free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#000000,#1a1a2e,#16213e,#0f3460);">
+          <span class="tc-grad-emoji">✨</span>
+        </div>
+        <div class="tc-tag">✨ Image Gen</div>
+        <div class="tc-free">Via ChatGPT</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">DALL·E 3</div>
+        <div class="tc-tagline">OpenAI's Flagship Image Model</div>
+        <div class="tc-desc">DALL·E 3 by OpenAI generates highly accurate, detailed images from natural language descriptions. It understands nuanced prompts better than predecessors and integrates natively with ChatGPT.</div>
+        <div class="tc-features"><span class="tc-feat">Prompt Accuracy</span><span class="tc-feat">ChatGPT Native</span><span class="tc-feat">API Access</span></div>
+        <a class="tc-btn" href="https://openai.com/dall-e-3" target="_blank">🚀 Try DALL·E 3</a>
+      </div>
+    </div>
+
+    <!-- 9 Stable Diffusion -->
+    <div class="tool-card reveal" data-cat="image design free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a1628,#0e4d4d,#0d9488,#2dd4bf);">
+          <span class="tc-grad-emoji">🌌</span>
+        </div>
+        <div class="tc-tag">🌌 Open Source</div>
+        <div class="tc-open">Open Source</div>
+        <div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Stable Diffusion</div>
+        <div class="tc-tagline">Open-Source Image Powerhouse</div>
+        <div class="tc-desc">Stable Diffusion is the cornerstone of open-source AI image generation. Run it locally, fine-tune on custom datasets, or use via API. Backed by a massive community of models and extensions.</div>
+        <div class="tc-features"><span class="tc-feat">Run Locally</span><span class="tc-feat">LoRA Fine-tune</span><span class="tc-feat">No Censorship</span></div>
+        <a class="tc-btn" href="https://stability.ai" target="_blank">🚀 Try Stable Diffusion</a>
+      </div>
+    </div>
+
+    <!-- 10 Runway -->
+    <div class="tool-card reveal" data-cat="video image">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0015,#1e0040,#4a00a0,#8000ff);">
+          <span class="tc-grad-emoji">🎬</span>
+        </div>
+        <div class="tc-tag">🎬 Video AI</div>
+        <div class="tc-free">Free Trial</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Runway Gen-3</div>
+        <div class="tc-tagline">Next-Gen AI Video Generation</div>
+        <div class="tc-desc">Runway Gen-3 Alpha is the leading AI video generation model, capable of creating stunning, cinematic video clips from text or images. A must-have tool for filmmakers and content creators.</div>
+        <div class="tc-features"><span class="tc-feat">Text-to-Video</span><span class="tc-feat">Img-to-Video</span><span class="tc-feat">Motion Brush</span></div>
+        <a class="tc-btn" href="https://runwayml.com" target="_blank">🚀 Try Runway</a>
+      </div>
+    </div>
+
+    <!-- 11 Pika Labs -->
+    <div class="tool-card reveal" data-cat="video free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#001a00,#003300,#00a650,#39ff14);">
+          <span class="tc-grad-emoji">⚡</span>
+        </div>
+        <div class="tc-tag">⚡ Video Gen</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Pika Labs</div>
+        <div class="tc-tagline">Fast AI Video in Seconds</div>
+        <div class="tc-desc">Pika 1.5 generates and edits AI videos in seconds. Famous for its creative special effects, lipsyncing, and rapid generation speed. Popular among social media creators and short-form video makers.</div>
+        <div class="tc-features"><span class="tc-feat">Lipsync</span><span class="tc-feat">SFX Effects</span><span class="tc-feat">Fast Gen</span></div>
+        <a class="tc-btn" href="https://pika.art" target="_blank">🚀 Try Pika</a>
+      </div>
+    </div>
+
+    <!-- 12 ChatGPT -->
+    <div class="tool-card reveal" data-cat="chat write free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a,#404040,#74aa9c);">
+          <span class="tc-grad-emoji">🤖</span>
+        </div>
+        <div class="tc-tag">🤖 AI Chat</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">ChatGPT</div>
+        <div class="tc-tagline">The World's Most Used AI</div>
+        <div class="tc-desc">ChatGPT by OpenAI is the world's most recognized AI assistant. Powered by GPT-4o, it handles writing, coding, analysis, math, web browsing, image generation, and voice conversations with ease.</div>
+        <div class="tc-features"><span class="tc-feat">GPT-4o</span><span class="tc-feat">Voice Mode</span><span class="tc-feat">Web Browse</span></div>
+        <a class="tc-btn" href="https://chat.openai.com" target="_blank">🚀 Try ChatGPT</a>
+      </div>
+    </div>
+
+    <!-- 13 Claude -->
+    <div class="tool-card reveal" data-cat="chat write free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1a0f00,#3d1f00,#cc6a00,#f5a623);">
+          <span class="tc-grad-emoji">🔮</span>
+        </div>
+        <div class="tc-tag">🔮 AI Chat</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Claude</div>
+        <div class="tc-tagline">Anthropic's Intelligent AI Assistant</div>
+        <div class="tc-desc">Claude by Anthropic is renowned for nuanced reasoning, long-document analysis, and thoughtful writing. Claude excels at complex tasks requiring careful judgment, coding projects, and research synthesis.</div>
+        <div class="tc-features"><span class="tc-feat">Long Context</span><span class="tc-feat">Safe & Nuanced</span><span class="tc-feat">Deep Coding</span></div>
+        <a class="tc-btn" href="https://claude.ai" target="_blank">🚀 Try Claude</a>
+      </div>
+    </div>
+
+    <!-- 14 Gemini -->
+    <div class="tool-card reveal" data-cat="chat write free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#000d26,#002060,#1a56db,#63b3ed);">
+          <span class="tc-grad-emoji">💫</span>
+        </div>
+        <div class="tc-tag">💫 AI Chat</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Gemini</div>
+        <div class="tc-tagline">Google's Most Capable AI</div>
+        <div class="tc-desc">Gemini 2.0 Flash is Google's flagship AI model, deeply integrated with Google Workspace, Search, and YouTube. Excels at multimodal tasks, real-time search grounding, and reasoning at speed.</div>
+        <div class="tc-features"><span class="tc-feat">Google Search</span><span class="tc-feat">Multimodal</span><span class="tc-feat">Workspace</span></div>
+        <a class="tc-btn" href="https://gemini.google.com" target="_blank">🚀 Try Gemini</a>
+      </div>
+    </div>
+
+    <!-- 15 Perplexity -->
+    <div class="tool-card reveal" data-cat="chat write free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#001010,#003333,#006666,#00cccc);">
+          <span class="tc-grad-emoji">🔍</span>
+        </div>
+        <div class="tc-tag">🔍 AI Search</div>
+        <div class="tc-free">Free</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Perplexity AI</div>
+        <div class="tc-tagline">AI-Powered Answer Engine</div>
+        <div class="tc-desc">Perplexity is an AI-powered search engine that provides cited, up-to-date answers. It combines LLM intelligence with real-time web search, making it the go-to tool for research and fact-checking.</div>
+        <div class="tc-features"><span class="tc-feat">Live Web Search</span><span class="tc-feat">Cited Sources</span><span class="tc-feat">Deep Research</span></div>
+        <a class="tc-btn" href="https://perplexity.ai" target="_blank">🚀 Try Perplexity</a>
+      </div>
+    </div>
+
+    <!-- 16 GitHub Copilot -->
+    <div class="tool-card reveal" data-cat="code write">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a001a,#1a0040,#2d00a0,#6600ff);">
+          <span class="tc-grad-emoji">💻</span>
+        </div>
+        <div class="tc-tag">💻 AI Coding</div>
+        <div class="tc-paid">Paid</div>
+        <div class="tc-rating">⭐ 4.8</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">GitHub Copilot</div>
+        <div class="tc-tagline">AI Pair Programmer</div>
+        <div class="tc-desc">GitHub Copilot is the world's leading AI coding assistant. It autocompletes code, explains bugs, writes tests, and now powers multi-file edits inside VS Code, JetBrains, and Neovim.</div>
+        <div class="tc-features"><span class="tc-feat">VS Code Native</span><span class="tc-feat">Chat Mode</span><span class="tc-feat">Multi-file Edit</span></div>
+        <a class="tc-btn" href="https://github.com/features/copilot" target="_blank">🚀 Try Copilot</a>
+      </div>
+    </div>
+
+    <!-- 17 Cursor -->
+    <div class="tool-card reveal" data-cat="code free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#000000,#0f0f0f,#1a1a2e,#4a4a8a);">
+          <span class="tc-grad-emoji">🖱️</span>
+        </div>
+        <div class="tc-tag">🖱️ AI IDE</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Cursor</div>
+        <div class="tc-tagline">The AI-First Code Editor</div>
+        <div class="tc-desc">Cursor is a VS Code fork built around AI-first coding. Composer mode lets you build entire features with natural language, with full codebase understanding and automatic error fixes.</div>
+        <div class="tc-features"><span class="tc-feat">Codebase Chat</span><span class="tc-feat">Composer Mode</span><span class="tc-feat">Agent Mode</span></div>
+        <a class="tc-btn" href="https://cursor.sh" target="_blank">🚀 Try Cursor</a>
+      </div>
+    </div>
+
+    <!-- 18 ElevenLabs -->
+    <div class="tool-card reveal" data-cat="voice write free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#1a001a,#400040,#800080,#da70d6);">
+          <span class="tc-grad-emoji">🎙️</span>
+        </div>
+        <div class="tc-tag">🎙️ Voice AI</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.9</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">ElevenLabs</div>
+        <div class="tc-tagline">Ultra-Realistic AI Voice</div>
+        <div class="tc-desc">ElevenLabs produces the most realistic AI speech and voice cloning available. Used by major studios and podcasters, it supports 29+ languages with emotional control and real-time streaming.</div>
+        <div class="tc-features"><span class="tc-feat">Voice Clone</span><span class="tc-feat">29 Languages</span><span class="tc-feat">Real-time API</span></div>
+        <a class="tc-btn" href="https://elevenlabs.io" target="_blank">🚀 Try ElevenLabs</a>
+      </div>
+    </div>
+
+    <!-- 19 Jasper AI -->
+    <div class="tool-card reveal" data-cat="write">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#001a33,#003366,#0066cc,#66b3ff);">
+          <span class="tc-grad-emoji">✍️</span>
+        </div>
+        <div class="tc-tag">✍️ Copywriting</div>
+        <div class="tc-paid">Premium</div>
+        <div class="tc-rating">⭐ 4.6</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Jasper AI</div>
+        <div class="tc-tagline">AI for Marketing & Brands</div>
+        <div class="tc-desc">Jasper AI is the premier AI writing platform for enterprise marketing teams. It learns your brand voice, maintains consistency across campaigns, and generates blogs, ads, emails, and social content at scale.</div>
+        <div class="tc-features"><span class="tc-feat">Brand Voice</span><span class="tc-feat">SEO Mode</span><span class="tc-feat">Team Collab</span></div>
+        <a class="tc-btn" href="https://jasper.ai" target="_blank">🚀 Try Jasper</a>
+      </div>
+    </div>
+
+    <!-- 20 Notion AI -->
+    <div class="tool-card reveal" data-cat="write chat free">
+      <div class="tc-img">
+        <div class="tc-gradient" style="background:linear-gradient(135deg,#0a0a0a,#1c1c1c,#333333,#f5f5f5);">
+          <span class="tc-grad-emoji">📝</span>
+        </div>
+        <div class="tc-tag">📝 Productivity</div>
+        <div class="tc-free">Free Tier</div>
+        <div class="tc-rating">⭐ 4.7</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Notion AI</div>
+        <div class="tc-tagline">AI Built into Your Workspace</div>
+        <div class="tc-desc">Notion AI transforms your notes and docs into a supercharged knowledge base. It summarizes meeting notes, drafts documents, extracts action items, and answers questions from your entire workspace.</div>
+        <div class="tc-features"><span class="tc-feat">Workspace Chat</span><span class="tc-feat">Auto-Summarize</span><span class="tc-feat">Docs & DB</span></div>
+        <a class="tc-btn" href="https://notion.so/product/ai" target="_blank">🚀 Try Notion AI</a>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -41,48 +871,121 @@
   <div class="footer-logo">EVERY AI</div>
   <p>© 2026 Every AI · Gateway to all AI tools</p>
 </footer>
-</div>
+
+</div><!-- end wrapper -->
 
 <script>
-/* NEURAL CANVAS */
+/* ─── NEURAL CANVAS ─── */
 const canvas=document.getElementById('neuralCanvas');
 const ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
 const nodes=[];
-for(let i=0;i<55;i++){nodes.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,r:Math.random()*2.5+1,pulse:Math.random()*Math.PI*2});}
+for(let i=0;i<60;i++){
+  nodes.push({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    vx:(Math.random()-0.5)*0.4,
+    vy:(Math.random()-0.5)*0.4,
+    r:Math.random()*2.5+1,
+    pulse:Math.random()*Math.PI*2
+  });
+}
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const t=Date.now()*0.001;
-  nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>canvas.width)n.vx*=-1;if(n.y<0||n.y>canvas.height)n.vy*=-1;n.pulse+=0.03;});
-  for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;const dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){ctx.strokeStyle=`hsla(${155+Math.sin(t*0.3)*15},70%,55%,${(1-dist/150)*0.2})`;ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();}}}
-  nodes.forEach(n=>{const glow=(Math.sin(n.pulse)+1)/2;const hue=150+Math.sin(t+n.pulse)*20;ctx.shadowColor=`hsl(${hue},80%,65%)`;ctx.shadowBlur=8*glow;ctx.fillStyle=`hsla(${hue},70%,65%,${0.4+glow*0.5})`;ctx.beginPath();ctx.arc(n.x,n.y,n.r*(0.8+glow*0.4),0,Math.PI*2);ctx.fill();});
-  ctx.shadowBlur=0;requestAnimationFrame(draw);
+  nodes.forEach(n=>{
+    n.x+=n.vx;n.y+=n.vy;
+    if(n.x<0||n.x>canvas.width)n.vx*=-1;
+    if(n.y<0||n.y>canvas.height)n.vy*=-1;
+    n.pulse+=0.03;
+  });
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<150){
+        ctx.strokeStyle=`hsla(${155+Math.sin(t*0.3)*15},70%,55%,${(1-dist/150)*0.18})`;
+        ctx.lineWidth=0.8;
+        ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n=>{
+    const glow=(Math.sin(n.pulse)+1)/2;
+    const hue=150+Math.sin(t+n.pulse)*30;
+    ctx.shadowColor=`hsl(${hue},80%,65%)`;
+    ctx.shadowBlur=8*glow;
+    ctx.fillStyle=`hsla(${hue},70%,65%,${0.4+glow*0.5})`;
+    ctx.beginPath();ctx.arc(n.x,n.y,n.r*(0.8+glow*0.4),0,Math.PI*2);ctx.fill();
+  });
+  ctx.shadowBlur=0;
+  requestAnimationFrame(draw);
 }
 draw();
 
-/* PARTICLES */
-for(let i=0;i<70;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*0.3};`;document.querySelector('.bg-scene').appendChild(p);}
+/* ─── PARTICLES ─── */
+const bgScene=document.querySelector('.bg-scene');
+for(let i=0;i<80;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.cssText=`
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    animation-duration:${3+Math.random()*6}s;
+    animation-delay:${Math.random()*6}s;
+    opacity:${Math.random()*0.4};
+    width:${Math.random()*3+1}px;
+    height:${Math.random()*3+1}px;
+    background:hsl(${Math.random()*60+140},80%,65%);
+  `;
+  bgScene.appendChild(p);
+}
 
-/* HERO EQ */
+/* ─── HERO EQ ─── */
 const heroEq=document.getElementById('heroEq');
-for(let i=0;i<22;i++){const bar=document.createElement('div');bar.className='eq-bar';const h=Math.floor(10+Math.random()*30);bar.style.cssText=`--h:${h}px;animation-duration:${0.4+Math.random()*0.8}s;animation-delay:${Math.random()*0.5}s;`;heroEq.appendChild(bar);}
+for(let i=0;i<24;i++){
+  const bar=document.createElement('div');
+  bar.className='eq-bar';
+  const h=Math.floor(10+Math.random()*35);
+  bar.style.cssText=`--h:${h}px;animation-duration:${0.35+Math.random()*0.7}s;animation-delay:${Math.random()*0.5}s;`;
+  heroEq.appendChild(bar);
+}
 
-/* SOUND WAVE */
+/* ─── SOUND WAVE ─── */
 const sw=document.getElementById('soundwave');
-for(let i=0;i<120;i++){const bar=document.createElement('div');bar.className='sw-bar';const h=Math.floor(5+Math.random()*55);bar.style.cssText=`--h:${h}px;animation-duration:${0.3+Math.random()*0.7}s;animation-delay:${Math.random()*0.6}s;`;sw.appendChild(bar);}
+for(let i=0;i<140;i++){
+  const bar=document.createElement('div');
+  bar.className='sw-bar';
+  const h=Math.floor(4+Math.random()*60);
+  bar.style.cssText=`--h:${h}px;animation-duration:${0.3+Math.random()*0.8}s;animation-delay:${Math.random()*0.8}s;`;
+  sw.appendChild(bar);
+}
 
-/* REVEAL */
+/* ─── REVEAL ─── */
 const revealEls=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80);});},{threshold:0.08});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*60);
+  });
+},{threshold:0.06});
 revealEls.forEach(el=>observer.observe(el));
 
-/* FILTER */
+/* ─── FILTER ─── */
 function filterCards(cat,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+  let idx=0;
   document.querySelectorAll('.tool-card').forEach(card=>{
-    card.style.display=(cat==='all'||(card.dataset.cat||'').includes(cat))?'flex':'none';
+    const show=cat==='all'||(card.dataset.cat||'').includes(cat);
+    if(show){
+      card.style.display='flex';
+      card.classList.remove('visible');
+      setTimeout(()=>card.classList.add('visible'),idx*60);
+      idx++;
+    } else {
+      card.style.display='none';
+    }
   });
 }
 </script>
